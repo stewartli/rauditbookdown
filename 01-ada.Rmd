@@ -40,7 +40,7 @@ This book follows a clear flowchart of data analytics and science from [R4DS](ht
 - Chapter 5 perform audit procedures on general ledger from external auditors points of view. It goes through a variety of technical options for different audit phases.     
 - Chapter 6 looks at the various utility tools which would not fit elsewhere in the book, and yet be important enough to mention.    
 
-This book is ~~to be published by Chapman & Hall/CRC Press in 2022. Its online version is free to read thanks to the publisher, and~~ licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License. If you acknowledge the source and use the contents or any examples of this book for teaching purposes, you don’t need to ask the permission to do so.
+This book is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License. The code contained in this book is available under the MIT license. If you acknowledge the source and use the contents or any examples of this book for teaching purposes, you don’t need to ask the permission to do so.
 
 My thank to various fantastic packages authors in R and Python community whose work allows me to write this book. I would like to thank various people who helped us make this book better by reading early drafts. 
 

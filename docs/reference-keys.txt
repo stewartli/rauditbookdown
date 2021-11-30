@@ -1,5 +1,4 @@
 tab:unnamed-chunk-77
-about-the-author
 introduction
 intror
 setup

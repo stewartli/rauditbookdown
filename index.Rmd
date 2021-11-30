@@ -25,7 +25,7 @@ library(tidyverse)
 ```
 
 
-**About the Author**
+# About the Author{-}
 
 [Stewart Li](https://stewartli.github.io/tailwindcss/) is a consultant with [RAudit Solution LLP](https://stewartli.github.io/tailwindcss/). He is a Chartered Accountant and specialized in data analytics and data science in the area of internal control and forensic accounting. Visit the website to see his work. 
 
