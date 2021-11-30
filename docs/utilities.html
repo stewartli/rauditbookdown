@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 7 Utilities | README</title>
+  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 7 Utilities | README" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:image" content="/img/cover.jpg" />
+  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 7 Utilities | README" />
+  
+  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="twitter:image" content="/img/cover.jpg" />
+
+<meta name="author" content="Stewart Li" />
+
+
+<meta name="date" content="2021-11-30" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="external-auditors.html"/>
+<link rel="next" href="references.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.5.1/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.17/datatables.js"></script>
+<link href="libs/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.10.20/js/jquery.dataTables.min.js"></script>
+<link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.1/js/crosstalk.min.js"></script>
+<script src="libs/d3-4.10.2/d3.min.js"></script>
+<link href="libs/collapsibleTree-0.1.6/collapsibleTree.css" rel="stylesheet" />
+<script src="libs/collapsibleTree-binding-0.1.7/collapsibleTree.js"></script>
+<link href="libs/wordcloud2-0.0.1/wordcloud.css" rel="stylesheet" />
+<script src="libs/wordcloud2-0.0.1/wordcloud2-all.js"></script>
+<script src="libs/wordcloud2-0.0.1/hover.js"></script>
+<script src="libs/wordcloud2-binding-0.2.1/wordcloud2.js"></script>
+<link href="libs/table1-1.0/table1_defaults.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Data Analytics in R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About the Author</a></li>
+<li class="chapter" data-level="2" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>2</b> Introduction</a></li>
+<li class="chapter" data-level="3" data-path="intror.html"><a href="intror.html"><i class="fa fa-check"></i><b>3</b> R basics</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="intror.html"><a href="intror.html#setup"><i class="fa fa-check"></i><b>3.1</b> Setup</a></li>
+<li class="chapter" data-level="3.2" data-path="intror.html"><a href="intror.html#help"><i class="fa fa-check"></i><b>3.2</b> Help</a></li>
+<li class="chapter" data-level="3.3" data-path="intror.html"><a href="intror.html#variable"><i class="fa fa-check"></i><b>3.3</b> Variable</a></li>
+<li class="chapter" data-level="3.4" data-path="intror.html"><a href="intror.html#data-structure"><i class="fa fa-check"></i><b>3.4</b> Data structure</a></li>
+<li class="chapter" data-level="3.5" data-path="intror.html"><a href="intror.html#control-flow"><i class="fa fa-check"></i><b>3.5</b> Control flow</a></li>
+<li class="chapter" data-level="3.6" data-path="intror.html"><a href="intror.html#function"><i class="fa fa-check"></i><b>3.6</b> Function</a></li>
+<li class="chapter" data-level="3.7" data-path="intror.html"><a href="intror.html#oop"><i class="fa fa-check"></i><b>3.7</b> OOP</a></li>
+<li class="chapter" data-level="3.8" data-path="intror.html"><a href="intror.html#io"><i class="fa fa-check"></i><b>3.8</b> IO</a></li>
+<li class="chapter" data-level="3.9" data-path="intror.html"><a href="intror.html#system"><i class="fa fa-check"></i><b>3.9</b> System</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="import.html"><a href="import.html"><i class="fa fa-check"></i><b>4</b> Import</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="import.html"><a href="import.html#dataset"><i class="fa fa-check"></i><b>4.1</b> Dataset</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="import.html"><a href="import.html#data-to-database"><i class="fa fa-check"></i><b>4.1.1</b> Data to database</a></li>
+<li class="chapter" data-level="4.1.2" data-path="import.html"><a href="import.html#data-model"><i class="fa fa-check"></i><b>4.1.2</b> Data model</a></li>
+<li class="chapter" data-level="4.1.3" data-path="import.html"><a href="import.html#join-tables"><i class="fa fa-check"></i><b>4.1.3</b> Join tables</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="import.html"><a href="import.html#sqlite"><i class="fa fa-check"></i><b>4.2</b> SQLite</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="import.html"><a href="import.html#connection"><i class="fa fa-check"></i><b>4.2.1</b> Connection</a></li>
+<li class="chapter" data-level="4.2.2" data-path="import.html"><a href="import.html#r-code-chunk"><i class="fa fa-check"></i><b>4.2.2</b> R code chunk</a></li>
+<li class="chapter" data-level="4.2.3" data-path="import.html"><a href="import.html#sql-code-chunk"><i class="fa fa-check"></i><b>4.2.3</b> SQL code chunk</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="fpa.html"><a href="fpa.html"><i class="fa fa-check"></i><b>5</b> FP&amp;A</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="fpa.html"><a href="fpa.html#validation"><i class="fa fa-check"></i><b>5.1</b> Validation</a></li>
+<li class="chapter" data-level="5.2" data-path="fpa.html"><a href="fpa.html#eda"><i class="fa fa-check"></i><b>5.2</b> EDA</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="fpa.html"><a href="fpa.html#categorical"><i class="fa fa-check"></i><b>5.2.1</b> Categorical</a></li>
+<li class="chapter" data-level="5.2.2" data-path="fpa.html"><a href="fpa.html#numeric"><i class="fa fa-check"></i><b>5.2.2</b> Numeric</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="fpa.html"><a href="fpa.html#business-ananlysis"><i class="fa fa-check"></i><b>5.3</b> Business ananlysis</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="fpa.html"><a href="fpa.html#product-profit-margin"><i class="fa fa-check"></i><b>5.3.1</b> Product profit margin</a></li>
+<li class="chapter" data-level="5.3.2" data-path="fpa.html"><a href="fpa.html#product-category"><i class="fa fa-check"></i><b>5.3.2</b> Product category</a></li>
+<li class="chapter" data-level="5.3.3" data-path="fpa.html"><a href="fpa.html#manufactuer"><i class="fa fa-check"></i><b>5.3.3</b> Manufactuer</a></li>
+<li class="chapter" data-level="5.3.4" data-path="fpa.html"><a href="fpa.html#store"><i class="fa fa-check"></i><b>5.3.4</b> Store</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="fpa.html"><a href="fpa.html#info-graphic"><i class="fa fa-check"></i><b>5.4</b> Info graphic</a></li>
+<li class="chapter" data-level="5.5" data-path="fpa.html"><a href="fpa.html#report"><i class="fa fa-check"></i><b>5.5</b> Report</a></li>
+<li class="chapter" data-level="5.6" data-path="fpa.html"><a href="fpa.html#dashboard"><i class="fa fa-check"></i><b>5.6</b> Dashboard</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="external-auditors.html"><a href="external-auditors.html"><i class="fa fa-check"></i><b>6</b> External Auditors</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="external-auditors.html"><a href="external-auditors.html#cleaning"><i class="fa fa-check"></i><b>6.1</b> Cleaning</a></li>
+<li class="chapter" data-level="6.2" data-path="external-auditors.html"><a href="external-auditors.html#validation-1"><i class="fa fa-check"></i><b>6.2</b> Validation</a></li>
+<li class="chapter" data-level="6.3" data-path="external-auditors.html"><a href="external-auditors.html#eda-1"><i class="fa fa-check"></i><b>6.3</b> EDA</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="external-auditors.html"><a href="external-auditors.html#missing-value"><i class="fa fa-check"></i><b>6.3.1</b> Missing value</a></li>
+<li class="chapter" data-level="6.3.2" data-path="external-auditors.html"><a href="external-auditors.html#categorical-1"><i class="fa fa-check"></i><b>6.3.2</b> Categorical</a></li>
+<li class="chapter" data-level="6.3.3" data-path="external-auditors.html"><a href="external-auditors.html#numberic"><i class="fa fa-check"></i><b>6.3.3</b> Numberic</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="external-auditors.html"><a href="external-auditors.html#audit-planning"><i class="fa fa-check"></i><b>6.4</b> Audit planning</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="external-auditors.html"><a href="external-auditors.html#test-of-controls"><i class="fa fa-check"></i><b>6.4.1</b> Test of controls</a></li>
+<li class="chapter" data-level="6.4.2" data-path="external-auditors.html"><a href="external-auditors.html#digits-tests"><i class="fa fa-check"></i><b>6.4.2</b> Digits tests</a></li>
+<li class="chapter" data-level="6.4.3" data-path="external-auditors.html"><a href="external-auditors.html#benfords-law"><i class="fa fa-check"></i><b>6.4.3</b> Benford’s law</a></li>
+<li class="chapter" data-level="6.4.4" data-path="external-auditors.html"><a href="external-auditors.html#outlier"><i class="fa fa-check"></i><b>6.4.4</b> Outlier</a></li>
+<li class="chapter" data-level="6.4.5" data-path="external-auditors.html"><a href="external-auditors.html#ratios"><i class="fa fa-check"></i><b>6.4.5</b> Ratios</a></li>
+<li class="chapter" data-level="6.4.6" data-path="external-auditors.html"><a href="external-auditors.html#cutomers"><i class="fa fa-check"></i><b>6.4.6</b> Cutomers</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="external-auditors.html"><a href="external-auditors.html#substantive-test"><i class="fa fa-check"></i><b>6.5</b> Substantive test</a>
+<ul>
+<li class="chapter" data-level="6.5.1" data-path="external-auditors.html"><a href="external-auditors.html#reconcilation"><i class="fa fa-check"></i><b>6.5.1</b> Reconcilation</a></li>
+<li class="chapter" data-level="6.5.2" data-path="external-auditors.html"><a href="external-auditors.html#aging-report"><i class="fa fa-check"></i><b>6.5.2</b> Aging report</a></li>
+<li class="chapter" data-level="6.5.3" data-path="external-auditors.html"><a href="external-auditors.html#confirmation-letter"><i class="fa fa-check"></i><b>6.5.3</b> Confirmation letter</a></li>
+</ul></li>
+<li class="chapter" data-level="6.6" data-path="external-auditors.html"><a href="external-auditors.html#reporting"><i class="fa fa-check"></i><b>6.6</b> Reporting</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="utilities.html"><a href="utilities.html"><i class="fa fa-check"></i><b>7</b> Utilities</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="utilities.html"><a href="utilities.html#command-line-tool"><i class="fa fa-check"></i><b>7.1</b> Command line tool</a></li>
+<li class="chapter" data-level="7.2" data-path="utilities.html"><a href="utilities.html#pdf-data"><i class="fa fa-check"></i><b>7.2</b> PDF data</a></li>
+<li class="chapter" data-level="7.3" data-path="utilities.html"><a href="utilities.html#learnr"><i class="fa fa-check"></i><b>7.3</b> Learnr</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">README</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="utilities" class="section level1" number="7">
+<h1><span class="header-section-number">Chapter 7</span> Utilities</h1>
+<div id="command-line-tool" class="section level2" number="7.1">
+<h2><span class="header-section-number">7.1</span> Command line tool</h2>
+<p>Write and run a R script on a terminal.</p>
+<div class="sourceCode" id="cb515"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb515-1"><a href="utilities.html#cb515-1" aria-hidden="true" tabindex="-1"></a>st_cml <span class="ot">&lt;-</span> <span class="cf">function</span>(df){</span>
+<span id="cb515-2"><a href="utilities.html#cb515-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="fu">paste0</span>(<span class="st">&quot;Your dataset has&quot;</span>, </span>
+<span id="cb515-3"><a href="utilities.html#cb515-3" aria-hidden="true" tabindex="-1"></a>             <span class="st">&#39;</span><span class="sc">\x1b</span><span class="st">[6;30;42m&#39;</span>, <span class="st">&quot;[&quot;</span>, <span class="fu">dim</span>(df)[<span class="dv">1</span>], <span class="st">&quot; &quot;</span>, <span class="fu">dim</span>(df)[<span class="dv">2</span>], <span class="st">&quot;]&quot;</span>, <span class="st">&#39;</span><span class="sc">\x1b</span><span class="st">[0m&#39;</span>,</span>
+<span id="cb515-4"><a href="utilities.html#cb515-4" aria-hidden="true" tabindex="-1"></a>             <span class="st">&quot;rows and columns&quot;</span>, <span class="st">&quot;.</span><span class="sc">\n</span><span class="st">&quot;</span>))</span>
+<span id="cb515-5"><a href="utilities.html#cb515-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb515-6"><a href="utilities.html#cb515-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb515-7"><a href="utilities.html#cb515-7" aria-hidden="true" tabindex="-1"></a>main <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb515-8"><a href="utilities.html#cb515-8" aria-hidden="true" tabindex="-1"></a>  args <span class="ot">&lt;-</span> <span class="fu">commandArgs</span>(<span class="at">trailingOnly =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb515-9"><a href="utilities.html#cb515-9" aria-hidden="true" tabindex="-1"></a>  f <span class="ot">&lt;-</span> args[<span class="dv">1</span>]</span>
+<span id="cb515-10"><a href="utilities.html#cb515-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stopifnot</span>(<span class="st">&quot;Please specificy a csv file&quot;</span> <span class="ot">=</span> <span class="fu">length</span>(f) <span class="sc">==</span> <span class="dv">1</span>)</span>
+<span id="cb515-11"><a href="utilities.html#cb515-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stopifnot</span>(<span class="st">&quot;Please specificy a csv file&quot;</span> <span class="ot">=</span> tools<span class="sc">::</span><span class="fu">file_ext</span>(<span class="st">&quot;data/gl.csv&quot;</span>) <span class="sc">==</span> <span class="st">&quot;csv&quot;</span>)</span>
+<span id="cb515-12"><a href="utilities.html#cb515-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_cml</span>(<span class="fu">read.csv</span>(<span class="at">file =</span> f))</span>
+<span id="cb515-13"><a href="utilities.html#cb515-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb515-14"><a href="utilities.html#cb515-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb515-15"><a href="utilities.html#cb515-15" aria-hidden="true" tabindex="-1"></a><span class="fu">main</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb516"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb516-1"><a href="utilities.html#cb516-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;img/cml1.png&quot;</span>)</span></code></pre></div>
+<p><img src="img/cml1.png" width="960" /></p>
+<div class="sourceCode" id="cb517"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb517-1"><a href="utilities.html#cb517-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;img/cml2.png&quot;</span>)</span></code></pre></div>
+<p><img src="img/cml2.png" width="960" /></p>
+</div>
+<div id="pdf-data" class="section level2" number="7.2">
+<h2><span class="header-section-number">7.2</span> PDF data</h2>
+<p>Data inside of PDF documents can be extracted via <code>pdftools</code>. Data inside of a website can be pulled out via <code>rvest</code>. Web scrapping is not covered here. For a detailed example, refer to <a href="https://rpubs.com/Stewartli/518397">Listed companies in Singapore</a>.</p>
+<div class="sourceCode" id="cb518"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb518-1"><a href="utilities.html#cb518-1" aria-hidden="true" tabindex="-1"></a>txt <span class="ot">&lt;-</span> pdftools<span class="sc">::</span><span class="fu">pdf_text</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;suppliments/subset_2017.pdf&quot;</span>))</span>
+<span id="cb518-2"><a href="utilities.html#cb518-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb518-3"><a href="utilities.html#cb518-3" aria-hidden="true" tabindex="-1"></a>txt1 <span class="ot">&lt;-</span> txt[<span class="dv">1</span>] <span class="sc">%&gt;%</span> </span>
+<span id="cb518-4"><a href="utilities.html#cb518-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_split</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb518-5"><a href="utilities.html#cb518-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unlist</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb519"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb519-1"><a href="utilities.html#cb519-1" aria-hidden="true" tabindex="-1"></a>txt1_start <span class="ot">&lt;-</span> stringr<span class="sc">::</span><span class="fu">str_which</span>(txt1, <span class="st">&quot;Property, plant and equipment&quot;</span>)</span>
+<span id="cb519-2"><a href="utilities.html#cb519-2" aria-hidden="true" tabindex="-1"></a>txt1_end <span class="ot">&lt;-</span> stringr<span class="sc">::</span><span class="fu">str_which</span>(txt1, <span class="st">&quot;Net assets&quot;</span>)</span>
+<span id="cb519-3"><a href="utilities.html#cb519-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb519-4"><a href="utilities.html#cb519-4" aria-hidden="true" tabindex="-1"></a>txt1_raw <span class="ot">&lt;-</span> txt1[txt1_start<span class="sc">:</span>txt1_end] <span class="sc">%&gt;%</span> </span>
+<span id="cb519-5"><a href="utilities.html#cb519-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_trim</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb519-6"><a href="utilities.html#cb519-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_replace_all</span>(<span class="st">&quot;</span><span class="sc">\\</span><span class="st">s{2,}&quot;</span>, <span class="st">&quot;|&quot;</span>) <span class="sc">%&gt;%</span>                                     </span>
+<span id="cb519-7"><a href="utilities.html#cb519-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_remove_all</span>(<span class="st">&quot;,&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb519-8"><a href="utilities.html#cb519-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">enframe</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb519-9"><a href="utilities.html#cb519-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(value, </span>
+<span id="cb519-10"><a href="utilities.html#cb519-10" aria-hidden="true" tabindex="-1"></a>           <span class="at">into =</span> <span class="fu">c</span>(<span class="st">&quot;account&quot;</span>, <span class="st">&quot;note&quot;</span>, <span class="st">&quot;group2017&quot;</span>, <span class="st">&quot;group2016&quot;</span>, <span class="st">&quot;company2017&quot;</span>, <span class="st">&quot;company2016&quot;</span>), </span>
+<span id="cb519-11"><a href="utilities.html#cb519-11" aria-hidden="true" tabindex="-1"></a>           <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\\</span><span class="st">|&quot;</span>, <span class="at">extra =</span> <span class="st">&quot;merge&quot;</span>, <span class="at">fill =</span> <span class="st">&quot;right&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb519-12"><a href="utilities.html#cb519-12" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(<span class="sc">!</span><span class="fu">str_detect</span>(account, <span class="st">&quot;[0-9]&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb519-13"><a href="utilities.html#cb519-13" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(<span class="sc">!</span>account <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Intangible assets arising from service&quot;</span>, </span>
+<span id="cb519-14"><a href="utilities.html#cb519-14" aria-hidden="true" tabindex="-1"></a>                                <span class="st">&quot;Trade and other receivables including&quot;</span>, </span>
+<span id="cb519-15"><a href="utilities.html#cb519-15" aria-hidden="true" tabindex="-1"></a>                                <span class="st">&quot;Liabilities&quot;</span>, </span>
+<span id="cb519-16"><a href="utilities.html#cb519-16" aria-hidden="true" tabindex="-1"></a>                                <span class="st">&quot;Trade and other payables including&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb519-17"><a href="utilities.html#cb519-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">account =</span> <span class="fu">case_when</span>(</span>
+<span id="cb519-18"><a href="utilities.html#cb519-18" aria-hidden="true" tabindex="-1"></a>    account <span class="sc">==</span> <span class="st">&quot;concession arrangements&quot;</span> <span class="sc">~</span> <span class="st">&quot;Intangible assets arising from service concession arrangements&quot;</span>, </span>
+<span id="cb519-19"><a href="utilities.html#cb519-19" aria-hidden="true" tabindex="-1"></a>    account <span class="sc">==</span> <span class="st">&#39;derivatives&#39;</span> <span class="sc">&amp;</span> group2017 <span class="sc">==</span> <span class="dv">3000</span> <span class="sc">~</span> <span class="st">&quot;Trade and other receivables including derivatives&quot;</span>, </span>
+<span id="cb519-20"><a href="utilities.html#cb519-20" aria-hidden="true" tabindex="-1"></a>    account <span class="sc">==</span> <span class="st">&#39;derivatives&#39;</span> <span class="sc">&amp;</span> group2017 <span class="sc">==</span> <span class="dv">248791</span> <span class="sc">~</span> <span class="st">&quot;Trade and other receivables including derivatives&quot;</span>, </span>
+<span id="cb519-21"><a href="utilities.html#cb519-21" aria-hidden="true" tabindex="-1"></a>    account <span class="sc">==</span> <span class="st">&#39;derivatives&#39;</span> <span class="sc">&amp;</span> group2017 <span class="sc">==</span> <span class="dv">491526</span> <span class="sc">~</span> <span class="st">&quot;Trade and other payables including derivatives&quot;</span>, </span>
+<span id="cb519-22"><a href="utilities.html#cb519-22" aria-hidden="true" tabindex="-1"></a>    account <span class="sc">==</span> <span class="st">&#39;derivatives&#39;</span> <span class="sc">&amp;</span> group2017 <span class="sc">==</span> <span class="dv">35895</span> <span class="sc">~</span> <span class="st">&quot;Trade and other payables including derivatives&quot;</span>, </span>
+<span id="cb519-23"><a href="utilities.html#cb519-23" aria-hidden="true" tabindex="-1"></a>    <span class="cn">TRUE</span> <span class="sc">~</span> account)) </span></code></pre></div>
+<div class="sourceCode" id="cb520"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb520-1"><a href="utilities.html#cb520-1" aria-hidden="true" tabindex="-1"></a>txt1_raw[txt1_raw<span class="sc">$</span>account <span class="sc">==</span> <span class="st">&quot;Non-current assets&quot;</span>, ][<span class="dv">3</span><span class="sc">:</span><span class="fu">ncol</span>(txt1_raw)] <span class="ot">&lt;-</span> txt1_raw[txt1_raw<span class="sc">$</span>account <span class="sc">==</span> <span class="st">&quot;Non-current assets&quot;</span>, ][<span class="dv">2</span><span class="sc">:</span>(<span class="fu">ncol</span>(txt1_raw)<span class="sc">-</span><span class="dv">1</span>)]</span>
+<span id="cb520-2"><a href="utilities.html#cb520-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb520-3"><a href="utilities.html#cb520-3" aria-hidden="true" tabindex="-1"></a>txt1_raw[txt1_raw<span class="sc">$</span>account <span class="sc">==</span> <span class="st">&quot;Current assets&quot;</span>, ][<span class="dv">3</span><span class="sc">:</span><span class="fu">ncol</span>(txt1_raw)] <span class="ot">&lt;-</span> txt1_raw[txt1_raw<span class="sc">$</span>account <span class="sc">==</span> <span class="st">&quot;Current assets&quot;</span>, ][<span class="dv">2</span><span class="sc">:</span>(<span class="fu">ncol</span>(txt1_raw)<span class="sc">-</span><span class="dv">1</span>)]</span>
+<span id="cb520-4"><a href="utilities.html#cb520-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb520-5"><a href="utilities.html#cb520-5" aria-hidden="true" tabindex="-1"></a>txt1_raw[txt1_raw<span class="sc">$</span>account <span class="sc">==</span> <span class="st">&quot;Total assets&quot;</span>, ][<span class="dv">3</span><span class="sc">:</span><span class="fu">ncol</span>(txt1_raw)] <span class="ot">&lt;-</span> txt1_raw[txt1_raw<span class="sc">$</span>account <span class="sc">==</span> <span class="st">&quot;Total assets&quot;</span>, ][<span class="dv">2</span><span class="sc">:</span>(<span class="fu">ncol</span>(txt1_raw)<span class="sc">-</span><span class="dv">1</span>)]</span>
+<span id="cb520-6"><a href="utilities.html#cb520-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb520-7"><a href="utilities.html#cb520-7" aria-hidden="true" tabindex="-1"></a>txt1_raw[txt1_raw<span class="sc">$</span>account <span class="sc">==</span> <span class="st">&quot;Current liabilities&quot;</span>, ][<span class="dv">3</span><span class="sc">:</span><span class="fu">ncol</span>(txt1_raw)] <span class="ot">&lt;-</span> txt1_raw[txt1_raw<span class="sc">$</span>account <span class="sc">==</span> <span class="st">&quot;Current liabilities&quot;</span>, ][<span class="dv">2</span><span class="sc">:</span>(<span class="fu">ncol</span>(txt1_raw)<span class="sc">-</span><span class="dv">1</span>)]</span>
+<span id="cb520-8"><a href="utilities.html#cb520-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb520-9"><a href="utilities.html#cb520-9" aria-hidden="true" tabindex="-1"></a>txt1_raw[txt1_raw<span class="sc">$</span>account <span class="sc">==</span> <span class="st">&quot;Net current assets&quot;</span>, ][<span class="dv">3</span><span class="sc">:</span><span class="fu">ncol</span>(txt1_raw)] <span class="ot">&lt;-</span> txt1_raw[txt1_raw<span class="sc">$</span>account <span class="sc">==</span> <span class="st">&quot;Net current assets&quot;</span>, ][<span class="dv">2</span><span class="sc">:</span>(<span class="fu">ncol</span>(txt1_raw)<span class="sc">-</span><span class="dv">1</span>)]</span>
+<span id="cb520-10"><a href="utilities.html#cb520-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb520-11"><a href="utilities.html#cb520-11" aria-hidden="true" tabindex="-1"></a>txt1_raw[txt1_raw<span class="sc">$</span>account <span class="sc">==</span> <span class="st">&quot;Non-current liabilities&quot;</span>, ][<span class="dv">3</span><span class="sc">:</span><span class="fu">ncol</span>(txt1_raw)] <span class="ot">&lt;-</span> txt1_raw[txt1_raw<span class="sc">$</span>account <span class="sc">==</span> <span class="st">&quot;Non-current liabilities&quot;</span>, ][<span class="dv">2</span><span class="sc">:</span>(<span class="fu">ncol</span>(txt1_raw)<span class="sc">-</span><span class="dv">1</span>)]</span>
+<span id="cb520-12"><a href="utilities.html#cb520-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb520-13"><a href="utilities.html#cb520-13" aria-hidden="true" tabindex="-1"></a>txt1_raw[txt1_raw<span class="sc">$</span>account <span class="sc">==</span> <span class="st">&quot;Net assets&quot;</span>, ][<span class="dv">3</span><span class="sc">:</span><span class="fu">ncol</span>(txt1_raw)] <span class="ot">&lt;-</span> txt1_raw[txt1_raw<span class="sc">$</span>account <span class="sc">==</span> <span class="st">&quot;Net assets&quot;</span>, ][<span class="dv">2</span><span class="sc">:</span>(<span class="fu">ncol</span>(txt1_raw)<span class="sc">-</span><span class="dv">1</span>)]</span>
+<span id="cb520-14"><a href="utilities.html#cb520-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb520-15"><a href="utilities.html#cb520-15" aria-hidden="true" tabindex="-1"></a>txt1_raw[txt1_raw<span class="sc">$</span>account <span class="sc">==</span> <span class="st">&quot;Tax payable&quot;</span>, ][<span class="dv">3</span><span class="sc">:</span><span class="fu">ncol</span>(txt1_raw)] <span class="ot">&lt;-</span> txt1_raw[txt1_raw<span class="sc">$</span>account <span class="sc">==</span> <span class="st">&quot;Tax payable&quot;</span>, ][<span class="dv">2</span><span class="sc">:</span>(<span class="fu">ncol</span>(txt1_raw)<span class="sc">-</span><span class="dv">1</span>)]</span></code></pre></div>
+<div class="sourceCode" id="cb521"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb521-1"><a href="utilities.html#cb521-1" aria-hidden="true" tabindex="-1"></a>txt1_clean <span class="ot">&lt;-</span> txt1_raw <span class="sc">%&gt;%</span> </span>
+<span id="cb521-2"><a href="utilities.html#cb521-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>name) <span class="sc">%&gt;%</span> </span>
+<span id="cb521-3"><a href="utilities.html#cb521-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="sc">-</span><span class="fu">c</span>(account), readr<span class="sc">::</span>parse_number))</span>
+<span id="cb521-4"><a href="utilities.html#cb521-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb521-5"><a href="utilities.html#cb521-5" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(txt1_clean, here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;suppliments/txt1.csv&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb522"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb522-1"><a href="utilities.html#cb522-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;img/pdf.png&quot;</span>)</span></code></pre></div>
+<p><img src="img/pdf.png" width="960" /></p>
+</div>
+<div id="learnr" class="section level2" number="7.3">
+<h2><span class="header-section-number">7.3</span> Learnr</h2>
+<p>You can easily make a interactive training materials to facilitate new staffs to get off the ground as quickly as possible.</p>
+<div class="sourceCode" id="cb523"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb523-1"><a href="utilities.html#cb523-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;img/learnr1.png&quot;</span>)</span></code></pre></div>
+<p><img src="img/learnr1.png" width="960" /></p>
+<div class="sourceCode" id="cb524"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb524-1"><a href="utilities.html#cb524-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;img/learnr2.png&quot;</span>)</span></code></pre></div>
+<p><img src="img/learnr2.png" width="960" /></p>
+<div class="sourceCode" id="cb525"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb525-1"><a href="utilities.html#cb525-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;img/learnr3.png&quot;</span>)</span></code></pre></div>
+<p><img src="img/learnr3.png" width="960" /></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="external-auditors.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/06-utils.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

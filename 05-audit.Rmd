@@ -334,11 +334,7 @@ Analyze revenue at the level of month based on both frequency and amount.
 
 
 ```{r}
-by(revenue, revenue$month[1:3], summary)
-```
-
-
-```{r}
+# by(revenue, revenue$month, summary)
 table(revenue$month) %>% prop.table()
 ```
 
