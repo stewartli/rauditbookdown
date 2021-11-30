@@ -1,0 +1,41 @@
+--- 
+title: "Data Analytics in R"
+subtitle: "For Accounting Professionals"
+author: "Stewart Li"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [book.bib, packages.bib]
+# url: your book url like https://bookdown.org/yihui/bookdown
+cover-image: "img/cover.jpg"
+description: |
+  This is a minimal example of using the bookdown package to write a book.
+  The HTML output format for this example is bookdown::gitbook,
+  set in the _output.yml file.
+link-citations: yes
+# github-repo: rstudio/bookdown-demo
+---
+
+
+```{r include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, error = FALSE, message = FALSE, 
+                      comment = ">")
+
+library(tidyverse)
+```
+
+
+# About the Author
+
+[Stewart Li](https://stewartli.github.io/tailwindcss/) is a consultant with [RAudit Solution LLP](https://stewartli.github.io/tailwindcss/). He is a Chartered Accountant and specialized in data analytics and data science in the area of internal control and forensic accounting. Visit the website to see his work. 
+
+
+
+
+
+
+
+
+
+
+
