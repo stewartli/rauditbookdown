@@ -5,7 +5,7 @@
 ## Data Analytics in R for Accounting Professionals
 
 
-[Read the book](stewartli.github.io/rauditbookdown/)
+[Read the book](https://stewartli.github.io/rauditbookdown/)
 
 
 
