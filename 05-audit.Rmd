@@ -1,6 +1,6 @@
 # External Auditors
 
-This chapter is written from External Auditors perspective. Has said that, techniques can be used by other accounting professionals. External auditors usually perform audit procedures on Trial balance throughout the process from audit planning and substantive testing to reporting. Those audit procedures typically include 1) test of control; 2) identification of outlier; 3) ratios; 4) confirmation letters; 5) vouching. For illustration purpose, the audit scope is revenue and account receivables accounts. 
+This chapter is written from External Auditors perspective. Has said that, techniques can be used by other accounting professionals. External auditors usually perform audit procedures on Trial balance throughout the process from audit planning and substantive testing to reporting. Those audit procedures typically include 1) test of control; 2) identification of outlier; 3) ratios; 4) confirmation letters; 5) vouching. For illustration purpose, the audit scope is revenue and account receivables accounts. Excel data is from [this website](https://www.journalofaccountancy.com/issues/2017/jan/general-ledger-data-mining.html).
 
 
 ## Cleaning
@@ -99,10 +99,25 @@ gl_df %>%
 ```
 
 
-```{r}
+```{r ea_miss_p1, eval=FALSE}
 gl_df %>% visdat::vis_miss()
 gl_df %>% visdat::vis_dat()
 gl_df %>% naniar::gg_miss_upset()
+```
+
+
+```{r}
+knitr::include_graphics("img/ea_miss_p1.png")
+```
+
+
+```{r}
+knitr::include_graphics("img/ea_miss_p2.png")
+```
+
+
+```{r}
+knitr::include_graphics("img/ea_miss_p3.png")
 ```
 
 
@@ -221,7 +236,7 @@ table(gl_df$month)
 ```
 
 
-```{r}
+```{r ea_pie_p1, eval=FALSE}
 mytable <- table(gl_df$quarter)                                            
 lbls <- paste(names(mytable), "\n", mytable, sep = "")
 pie(mytable, labels = lbls, main = "Number of transactions\n (for each quarter)")
@@ -229,7 +244,17 @@ pie(mytable, labels = lbls, main = "Number of transactions\n (for each quarter)"
 
 
 ```{r}
+knitr::include_graphics("img/ea_pie_p1.png")
+```
+
+
+```{r ea_pie_p2, eval=FALSE}
 mosaicplot(~ month + weekday, data = gl_df, color = TRUE, las = 1, main = NULL, xlab = "", ylab = "")
+```
+
+
+```{r}
+knitr::include_graphics("img/ea_pie_p2.png")
 ```
 
 
@@ -270,13 +295,21 @@ txt_pca <-  txt %>%
 txt_pca %>% 
   dplyr::filter(dimension == 1) %>% 
   arrange(desc(value))
+```
 
+
+```{r ea_txt_p1, eval=FALSE}
 txt_pca %>% 
   dplyr::filter(dimension == 2) %>% 
   top_n(10, abs(value)) %>% 
   mutate(word = fct_reorder(word, value)) %>%
   ggplot(aes(value, word)) +
   geom_col() 
+```
+
+
+```{r}
+knitr::include_graphics("img/ea_txt_p1.png")
 ```
 
 
@@ -292,7 +325,10 @@ txt_cor <- txt %>%
   widyr::pairwise_cor(word, name, sort = TRUE) %>%           
   dplyr::filter(correlation < 1) %>% 
   head(100)
+```
 
+
+```{r ea_txt_p2, eval=FALSE}
 txt_cor %>% 
   igraph::graph_from_data_frame() %>% 
   ggraph::ggraph(layout = 'kk') + 
@@ -300,6 +336,11 @@ txt_cor %>%
   ggraph::geom_node_point() +
   ggraph::geom_node_text(aes(label = name), repel = TRUE) +
   theme_void() 
+```
+
+
+```{r}
+knitr::include_graphics("img/ea_txt_p2.png")
 ```
 
 
@@ -339,7 +380,7 @@ table(revenue$month) %>% prop.table()
 ```
 
 
-```{r}
+```{r ea_revenue_p1, eval=FALSE}
 ggplot(revenue) +
   geom_bar(aes(x = factor(month), y = after_stat(count / sum(count)))) +
   scale_y_continuous(labels = scales::percent, name = "Proportion") +
@@ -349,6 +390,11 @@ ggplot(revenue) +
 
 
 ```{r}
+knitr::include_graphics("img/ea_revenue_p1.png")
+```
+
+
+```{r ea_revenue_p2, eval=FALSE}
 revenue %>% 
   ggplot(aes(month, credit)) +
   geom_bar(stat = 'summary', fun = "median", fill = 'steelblue') +
@@ -356,6 +402,11 @@ revenue %>%
   scale_y_continuous(breaks = seq(0, 600, by = 100), labels = scales::comma) +
   labs(x = "", y = "") +
   theme_light()
+```
+
+
+```{r}
+knitr::include_graphics("img/ea_revenue_p2.png")
 ```
 
 
@@ -508,7 +559,7 @@ revenue %>%
 ```
 
 
-```{r}
+```{r ea_revenue_p3, eval=FALSE}
 revenue %>% 
   ggplot(aes(sample = log10(credit))) +
   geom_qq() +
@@ -517,6 +568,11 @@ revenue %>%
 
 
 ```{r}
+knitr::include_graphics("img/ea_revenue_p3.png")
+```
+
+
+```{r ea_revenue_p4, eval=FALSE}
 getPalette <- colorRampPalette(RColorBrewer::brewer.pal(8, "Set2"))(12) 
 lb <- function(x) mean(x) - sd(x)
 ub <- function(x) mean(x) + sd(x)
@@ -546,6 +602,11 @@ revenue %>%
 
 
 ```{r}
+knitr::include_graphics("img/ea_revenue_p4.png")
+```
+
+
+```{r ea_revenue_p5, eval=FALSE}
 revenue %>% 
   ggplot(aes(credit, fill = factor(month))) +
   geom_histogram(bins = 50, alpha = .5) +
@@ -564,6 +625,11 @@ revenue %>%
 
 
 ```{r}
+knitr::include_graphics("img/ea_revenue_p5.png")
+```
+
+
+```{r ea_revenue_p6, eval=FALSE}
 revenue %>% 
   mutate(weekday = fct_relevel(weekday, rev(c("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")))) %>%
   ggplot(aes(credit, weekday)) +
@@ -577,6 +643,11 @@ revenue %>%
 
 
 ```{r}
+knitr::include_graphics("img/ea_revenue_p6.png")
+```
+
+
+```{r ea_revenue_p7, eval=FALSE}
 ml_mth <- revenue %>% 
   mutate(weekday = fct_relevel(weekday, rev(c("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")))) %>%
   group_by(month, weekday) %>%
@@ -600,6 +671,11 @@ ml_mth %>%
   scale_color_discrete(name = "Exceed", labels = c("Yes", "No"), guide = FALSE) +  
   labs(x = "Total revenue", y = "Number of transactions") +
   theme_light()
+```
+
+
+```{r}
+knitr::include_graphics("img/ea_revenue_p7.png")
 ```
 
 
@@ -720,8 +796,17 @@ The result conforms to Benford's law based on frequency.
 library(benford.analysis)
 
 bfd.cp <- benford(revenue$credit, number.of.digits = 2, sign = "both", round = 3) 
-plot(bfd.cp) 
 getSuspects(bfd.cp, revenue, by = "absolute.diff", how.many = 1) %>% as_tibble()
+```
+
+
+```{r ea_benlaw_p1, eval=FALSE}
+plot(bfd.cp) 
+```
+
+
+```{r}
+knitr::include_graphics("img/ea_benlaw_p1.png")
 ```
 
 
@@ -741,7 +826,7 @@ revenue %>%
 
 ```{r}
 revenue[which(revenue$credit %in% c(boxplot.stats(revenue$credit)$out)), ]
-subset(revenue, revenue$credit %in% boxplot(revenue$credit ~ revenue$month)$out) 
+# subset(revenue, revenue$credit %in% boxplot(revenue$credit ~ revenue$month)$out) 
 ```
 
 
@@ -764,7 +849,7 @@ revenue[which(abs(scale(revenue$credit)) > 1.96), ]
 ```
 
 
-```{r}
+```{r ea_zscore_p1, eval=FALSE}
 revenue %>% 
   mutate(z_score = scale(credit), 
          z_label = ifelse(abs(z_score - mean(z_score)) > 2*sd(z_score), "z", "ok")) %>% 
@@ -785,6 +870,11 @@ revenue %>%
   theme_minimal() + 
   labs(title = "Identification of sales outlier based on Z-score",
        x = NULL, y = NULL) 
+```
+
+
+```{r}
+knitr::include_graphics("img/ea_zscore_p1.png")
 ```
 
 
@@ -876,7 +966,7 @@ revenue %>%
 ```
 
 
-```{r}
+```{r ea_customer_p1, eval=FALSE}
 revenue %>% 
   mutate(name = fct_lump(name, 10, w = credit), 
          name = fct_reorder(name, credit, sum)) %>%                       
@@ -885,6 +975,11 @@ revenue %>%
   scale_x_continuous(label = scales::comma) +
   labs(x = "", y = "") +
   theme_light()
+```
+
+
+```{r}
+knitr::include_graphics("img/ea_customer_p1.png")
 ```
 
 
@@ -940,7 +1035,7 @@ revenue %>%
 Perform the customer churn analysis and identify one time customers based on specific characteristics.
 
 
-```{r}
+```{r ea_customer_p2, eval=FALSE}
 revenue %>% 
   select(date, name, credit) %>% 
   mutate(date = lubridate::ceiling_date(date, "day")) %>% 
@@ -968,14 +1063,14 @@ revenue %>%
 
 
 ```{r}
-# prcomp()
+knitr::include_graphics("img/ea_customer_p2.png")
 ```
 
 
 ## Substantive test
 
 
-```{r}
+```{r ea_trend_p1, eval=FALSE}
 gl_df %>% 
   dplyr::filter(subaccount %in% c("Revenue", "Accounts Receivable")) %>% 
   group_by(subaccount, month) %>% 
@@ -992,6 +1087,11 @@ gl_df %>%
        x = NULL,
        y = NULL, 
        color = "")                                                    
+```
+
+
+```{r}
+knitr::include_graphics("img/ea_trend_p1.png")
 ```
 
 

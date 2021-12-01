@@ -5,32 +5,26 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 3 Import | Data Analytics in R</title>
-  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
-The HTML output format for this example is bookdown::gitbook,
-set in the _output.yml file.</p>" />
+  <meta name="description" content="A complete use case for accounting professionals who want to leverage computer programming languages in their work." />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 3 Import | Data Analytics in R" />
   <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://github.com/stewartli/rauditbookdown" />
   
-  <meta property="og:image" content="/img/cover.jpg" />
-  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
-The HTML output format for this example is bookdown::gitbook,
-set in the _output.yml file.</p>" />
-  
+  <meta property="og:description" content="A complete use case for accounting professionals who want to leverage computer programming languages in their work." />
+  <meta name="github-repo" content="https://github.com/stewartli/rauditbookdown" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Chapter 3 Import | Data Analytics in R" />
   
-  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
-The HTML output format for this example is bookdown::gitbook,
-set in the _output.yml file.</p>" />
-  <meta name="twitter:image" content="/img/cover.jpg" />
+  <meta name="twitter:description" content="A complete use case for accounting professionals who want to leverage computer programming languages in their work." />
+  
 
 <meta name="author" content="Stewart Li" />
 
 
-<meta name="date" content="2021-11-30" />
+<meta name="date" content="2021-12-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -269,72 +263,72 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="data-to-database" class="section level3" number="3.1.1">
 <h3><span class="header-section-number">3.1.1</span> Data to database</h3>
 <p>This chapter uses <a href="https://www.microsoft.com/en-sg/download/confirmation.aspx?id=46801">sales data in Excel</a> with multiple worksheets. To put them into a database named stlidb, we need to read Excel worksheets into R and then copy those objects to the database separately. The database now contains eight tables as shown Figure 1.</p>
-<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="import.html#cb186-1" aria-hidden="true" tabindex="-1"></a>sheet_name <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">excel_sheets</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;data&quot;</span>, <span class="st">&quot;ContosoData.xlsx&quot;</span>))[<span class="dv">2</span><span class="sc">:</span><span class="dv">8</span>]</span>
-<span id="cb186-2"><a href="import.html#cb186-2" aria-hidden="true" tabindex="-1"></a>df_list <span class="ot">&lt;-</span> <span class="fu">map</span>(<span class="fu">set_names</span>(sheet_name), read_excel, <span class="at">path =</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;data&quot;</span>, <span class="st">&quot;ContosoData.xlsx&quot;</span>))</span>
-<span id="cb186-3"><a href="import.html#cb186-3" aria-hidden="true" tabindex="-1"></a><span class="fu">list2env</span>(df_list, <span class="at">envir =</span> .GlobalEnv)</span></code></pre></div>
-<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="import.html#cb187-1" aria-hidden="true" tabindex="-1"></a>Sales <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&#39;data/SampleContosoSalesTable.csv&#39;</span>))</span></code></pre></div>
-<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="import.html#cb188-1" aria-hidden="true" tabindex="-1"></a>con <span class="ot">&lt;-</span> DBI<span class="sc">::</span><span class="fu">dbConnect</span>(odbc<span class="sc">::</span><span class="fu">odbc</span>(),</span>
-<span id="cb188-2"><a href="import.html#cb188-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">Driver =</span> <span class="st">&quot;PostgreSQL Unicode&quot;</span>,                           </span>
-<span id="cb188-3"><a href="import.html#cb188-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">Database =</span> <span class="st">&quot;stlidb&quot;</span>,</span>
-<span id="cb188-4"><a href="import.html#cb188-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">UserName =</span> <span class="st">&quot;postgres&quot;</span>,</span>
-<span id="cb188-5"><a href="import.html#cb188-5" aria-hidden="true" tabindex="-1"></a>                     <span class="at">Password =</span> <span class="st">&quot;**********&quot;</span>,</span>
-<span id="cb188-6"><a href="import.html#cb188-6" aria-hidden="true" tabindex="-1"></a>                     <span class="at">Servername =</span> <span class="st">&quot;localhost&quot;</span>,</span>
-<span id="cb188-7"><a href="import.html#cb188-7" aria-hidden="true" tabindex="-1"></a>                     <span class="at">Port =</span> <span class="dv">5432</span>)</span>
-<span id="cb188-8"><a href="import.html#cb188-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb188-9"><a href="import.html#cb188-9" aria-hidden="true" tabindex="-1"></a>DBI<span class="sc">::</span><span class="fu">dbListTables</span>(con)</span>
-<span id="cb188-10"><a href="import.html#cb188-10" aria-hidden="true" tabindex="-1"></a>DBI<span class="sc">::</span><span class="fu">dbDisconnect</span>(con)</span></code></pre></div>
-<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="import.html#cb189-1" aria-hidden="true" tabindex="-1"></a>DBI<span class="sc">::</span><span class="fu">dbWriteTable</span>(con, <span class="st">&quot;Channel&quot;</span>, <span class="at">value =</span> Channel)</span>
-<span id="cb189-2"><a href="import.html#cb189-2" aria-hidden="true" tabindex="-1"></a>DBI<span class="sc">::</span><span class="fu">dbWriteTable</span>(con, <span class="st">&quot;Geography&quot;</span>, <span class="at">value =</span> Geography)</span>
-<span id="cb189-3"><a href="import.html#cb189-3" aria-hidden="true" tabindex="-1"></a>DBI<span class="sc">::</span><span class="fu">dbWriteTable</span>(con, <span class="st">&quot;Product&quot;</span>, <span class="at">value =</span> Product)</span>
-<span id="cb189-4"><a href="import.html#cb189-4" aria-hidden="true" tabindex="-1"></a>DBI<span class="sc">::</span><span class="fu">dbWriteTable</span>(con, <span class="st">&quot;ProductCategory&quot;</span>, <span class="at">value =</span> ProductCategory)</span>
-<span id="cb189-5"><a href="import.html#cb189-5" aria-hidden="true" tabindex="-1"></a>DBI<span class="sc">::</span><span class="fu">dbWriteTable</span>(con, <span class="st">&quot;ProductSubCategory&quot;</span>, <span class="at">value =</span> ProductSubCategory)</span>
-<span id="cb189-6"><a href="import.html#cb189-6" aria-hidden="true" tabindex="-1"></a>DBI<span class="sc">::</span><span class="fu">dbWriteTable</span>(con, <span class="st">&quot;Promotion&quot;</span>, <span class="at">value =</span> Promotion)</span>
-<span id="cb189-7"><a href="import.html#cb189-7" aria-hidden="true" tabindex="-1"></a>DBI<span class="sc">::</span><span class="fu">dbWriteTable</span>(con, <span class="st">&quot;Stores&quot;</span>, <span class="at">value =</span> Stores)</span>
-<span id="cb189-8"><a href="import.html#cb189-8" aria-hidden="true" tabindex="-1"></a>DBI<span class="sc">::</span><span class="fu">dbWriteTable</span>(con, <span class="st">&quot;Sales&quot;</span>, <span class="at">value =</span> Sales)</span></code></pre></div>
-<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="import.html#cb190-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;img/pgAdmin_01.png&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="import.html#cb187-1" aria-hidden="true" tabindex="-1"></a>sheet_name <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">excel_sheets</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;data&quot;</span>, <span class="st">&quot;ContosoData.xlsx&quot;</span>))[<span class="dv">2</span><span class="sc">:</span><span class="dv">8</span>]</span>
+<span id="cb187-2"><a href="import.html#cb187-2" aria-hidden="true" tabindex="-1"></a>df_list <span class="ot">&lt;-</span> <span class="fu">map</span>(<span class="fu">set_names</span>(sheet_name), read_excel, <span class="at">path =</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;data&quot;</span>, <span class="st">&quot;ContosoData.xlsx&quot;</span>))</span>
+<span id="cb187-3"><a href="import.html#cb187-3" aria-hidden="true" tabindex="-1"></a><span class="fu">list2env</span>(df_list, <span class="at">envir =</span> .GlobalEnv)</span></code></pre></div>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="import.html#cb188-1" aria-hidden="true" tabindex="-1"></a>Sales <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&#39;data/SampleContosoSalesTable.csv&#39;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="import.html#cb189-1" aria-hidden="true" tabindex="-1"></a>con <span class="ot">&lt;-</span> DBI<span class="sc">::</span><span class="fu">dbConnect</span>(odbc<span class="sc">::</span><span class="fu">odbc</span>(),</span>
+<span id="cb189-2"><a href="import.html#cb189-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">Driver =</span> <span class="st">&quot;PostgreSQL Unicode&quot;</span>,                           </span>
+<span id="cb189-3"><a href="import.html#cb189-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">Database =</span> <span class="st">&quot;stlidb&quot;</span>,</span>
+<span id="cb189-4"><a href="import.html#cb189-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">UserName =</span> <span class="st">&quot;postgres&quot;</span>,</span>
+<span id="cb189-5"><a href="import.html#cb189-5" aria-hidden="true" tabindex="-1"></a>                     <span class="at">Password =</span> <span class="st">&quot;**********&quot;</span>,</span>
+<span id="cb189-6"><a href="import.html#cb189-6" aria-hidden="true" tabindex="-1"></a>                     <span class="at">Servername =</span> <span class="st">&quot;localhost&quot;</span>,</span>
+<span id="cb189-7"><a href="import.html#cb189-7" aria-hidden="true" tabindex="-1"></a>                     <span class="at">Port =</span> <span class="dv">5432</span>)</span>
+<span id="cb189-8"><a href="import.html#cb189-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb189-9"><a href="import.html#cb189-9" aria-hidden="true" tabindex="-1"></a>DBI<span class="sc">::</span><span class="fu">dbListTables</span>(con)</span>
+<span id="cb189-10"><a href="import.html#cb189-10" aria-hidden="true" tabindex="-1"></a>DBI<span class="sc">::</span><span class="fu">dbDisconnect</span>(con)</span></code></pre></div>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="import.html#cb190-1" aria-hidden="true" tabindex="-1"></a>DBI<span class="sc">::</span><span class="fu">dbWriteTable</span>(con, <span class="st">&quot;Channel&quot;</span>, <span class="at">value =</span> Channel)</span>
+<span id="cb190-2"><a href="import.html#cb190-2" aria-hidden="true" tabindex="-1"></a>DBI<span class="sc">::</span><span class="fu">dbWriteTable</span>(con, <span class="st">&quot;Geography&quot;</span>, <span class="at">value =</span> Geography)</span>
+<span id="cb190-3"><a href="import.html#cb190-3" aria-hidden="true" tabindex="-1"></a>DBI<span class="sc">::</span><span class="fu">dbWriteTable</span>(con, <span class="st">&quot;Product&quot;</span>, <span class="at">value =</span> Product)</span>
+<span id="cb190-4"><a href="import.html#cb190-4" aria-hidden="true" tabindex="-1"></a>DBI<span class="sc">::</span><span class="fu">dbWriteTable</span>(con, <span class="st">&quot;ProductCategory&quot;</span>, <span class="at">value =</span> ProductCategory)</span>
+<span id="cb190-5"><a href="import.html#cb190-5" aria-hidden="true" tabindex="-1"></a>DBI<span class="sc">::</span><span class="fu">dbWriteTable</span>(con, <span class="st">&quot;ProductSubCategory&quot;</span>, <span class="at">value =</span> ProductSubCategory)</span>
+<span id="cb190-6"><a href="import.html#cb190-6" aria-hidden="true" tabindex="-1"></a>DBI<span class="sc">::</span><span class="fu">dbWriteTable</span>(con, <span class="st">&quot;Promotion&quot;</span>, <span class="at">value =</span> Promotion)</span>
+<span id="cb190-7"><a href="import.html#cb190-7" aria-hidden="true" tabindex="-1"></a>DBI<span class="sc">::</span><span class="fu">dbWriteTable</span>(con, <span class="st">&quot;Stores&quot;</span>, <span class="at">value =</span> Stores)</span>
+<span id="cb190-8"><a href="import.html#cb190-8" aria-hidden="true" tabindex="-1"></a>DBI<span class="sc">::</span><span class="fu">dbWriteTable</span>(con, <span class="st">&quot;Sales&quot;</span>, <span class="at">value =</span> Sales)</span></code></pre></div>
+<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="import.html#cb191-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;img/pgAdmin_01.png&quot;</span>)</span></code></pre></div>
 <p><img src="img/pgAdmin_01.png" width="960" /></p>
-<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="import.html#cb191-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;img/sqlite_01.png&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="import.html#cb192-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;img/sqlite_01.png&quot;</span>)</span></code></pre></div>
 <p><img src="img/sqlite_01.png" width="960" /></p>
 </div>
 <div id="data-model" class="section level3" number="3.1.2">
 <h3><span class="header-section-number">3.1.2</span> Data model</h3>
 <p>All eight tables are interlinked each other. After added primary and foreign keys to them, their relationship is clearly displayed in Figure 2.</p>
-<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="import.html#cb192-1" aria-hidden="true" tabindex="-1"></a>stlidb_dm <span class="ot">&lt;-</span> <span class="fu">dm_from_src</span>(con)</span>
-<span id="cb192-2"><a href="import.html#cb192-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb192-3"><a href="import.html#cb192-3" aria-hidden="true" tabindex="-1"></a>stlidb_dm_keys <span class="ot">&lt;-</span> stlidb_dm <span class="sc">%&gt;%</span></span>
-<span id="cb192-4"><a href="import.html#cb192-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dm_add_pk</span>(Channel, ChannelKey) <span class="sc">%&gt;%</span></span>
-<span id="cb192-5"><a href="import.html#cb192-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dm_add_pk</span>(Geography, GeographyKey) <span class="sc">%&gt;%</span></span>
-<span id="cb192-6"><a href="import.html#cb192-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dm_add_pk</span>(Product, ProductKey) <span class="sc">%&gt;%</span></span>
-<span id="cb192-7"><a href="import.html#cb192-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dm_add_pk</span>(ProductCategory, ProductCategoryKey) <span class="sc">%&gt;%</span></span>
-<span id="cb192-8"><a href="import.html#cb192-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dm_add_pk</span>(ProductSubCategory, ProductSubcategoryKey) <span class="sc">%&gt;%</span></span>
-<span id="cb192-9"><a href="import.html#cb192-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dm_add_pk</span>(Promotion, PromotionKey) <span class="sc">%&gt;%</span></span>
-<span id="cb192-10"><a href="import.html#cb192-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dm_add_pk</span>(Stores, StoreKey) <span class="sc">%&gt;%</span></span>
-<span id="cb192-11"><a href="import.html#cb192-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dm_add_pk</span>(Sales, SalesKey) <span class="sc">%&gt;%</span></span>
-<span id="cb192-12"><a href="import.html#cb192-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dm_add_fk</span>(Sales, ChannelKey, Channel) <span class="sc">%&gt;%</span></span>
-<span id="cb192-13"><a href="import.html#cb192-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dm_add_fk</span>(Sales, StoreKey, Stores) <span class="sc">%&gt;%</span></span>
-<span id="cb192-14"><a href="import.html#cb192-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dm_add_fk</span>(Sales, PromotionKey, Promotion) <span class="sc">%&gt;%</span></span>
-<span id="cb192-15"><a href="import.html#cb192-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dm_add_fk</span>(Sales, ProductKey, Product) <span class="sc">%&gt;%</span></span>
-<span id="cb192-16"><a href="import.html#cb192-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dm_add_fk</span>(Product, ProductSubcategoryKey, ProductSubCategory) <span class="sc">%&gt;%</span></span>
-<span id="cb192-17"><a href="import.html#cb192-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dm_add_fk</span>(ProductSubCategory, ProductCategoryKey, ProductCategory) <span class="sc">%&gt;%</span> </span>
-<span id="cb192-18"><a href="import.html#cb192-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dm_add_fk</span>(Stores, GeographyKey, Geography) </span>
-<span id="cb192-19"><a href="import.html#cb192-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb192-20"><a href="import.html#cb192-20" aria-hidden="true" tabindex="-1"></a>stlidb_dm_keys <span class="sc">%&gt;%</span></span>
-<span id="cb192-21"><a href="import.html#cb192-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dm_set_colors</span>(<span class="at">lightgreen =</span> <span class="fu">c</span>(Channel, Promotion, Stores, Geography), </span>
-<span id="cb192-22"><a href="import.html#cb192-22" aria-hidden="true" tabindex="-1"></a>                <span class="at">lightpink =</span> <span class="fu">c</span>(Product, ProductCategory, ProductSubCategory), </span>
-<span id="cb192-23"><a href="import.html#cb192-23" aria-hidden="true" tabindex="-1"></a>                <span class="at">grey =</span> Sales) <span class="sc">%&gt;%</span></span>
-<span id="cb192-24"><a href="import.html#cb192-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dm_draw</span>(<span class="at">view_type =</span> <span class="st">&#39;all&#39;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="import.html#cb193-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;img/dm.png&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="import.html#cb193-1" aria-hidden="true" tabindex="-1"></a>stlidb_dm <span class="ot">&lt;-</span> <span class="fu">dm_from_src</span>(con)</span>
+<span id="cb193-2"><a href="import.html#cb193-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb193-3"><a href="import.html#cb193-3" aria-hidden="true" tabindex="-1"></a>stlidb_dm_keys <span class="ot">&lt;-</span> stlidb_dm <span class="sc">%&gt;%</span></span>
+<span id="cb193-4"><a href="import.html#cb193-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dm_add_pk</span>(Channel, ChannelKey) <span class="sc">%&gt;%</span></span>
+<span id="cb193-5"><a href="import.html#cb193-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dm_add_pk</span>(Geography, GeographyKey) <span class="sc">%&gt;%</span></span>
+<span id="cb193-6"><a href="import.html#cb193-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dm_add_pk</span>(Product, ProductKey) <span class="sc">%&gt;%</span></span>
+<span id="cb193-7"><a href="import.html#cb193-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dm_add_pk</span>(ProductCategory, ProductCategoryKey) <span class="sc">%&gt;%</span></span>
+<span id="cb193-8"><a href="import.html#cb193-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dm_add_pk</span>(ProductSubCategory, ProductSubcategoryKey) <span class="sc">%&gt;%</span></span>
+<span id="cb193-9"><a href="import.html#cb193-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dm_add_pk</span>(Promotion, PromotionKey) <span class="sc">%&gt;%</span></span>
+<span id="cb193-10"><a href="import.html#cb193-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dm_add_pk</span>(Stores, StoreKey) <span class="sc">%&gt;%</span></span>
+<span id="cb193-11"><a href="import.html#cb193-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dm_add_pk</span>(Sales, SalesKey) <span class="sc">%&gt;%</span></span>
+<span id="cb193-12"><a href="import.html#cb193-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dm_add_fk</span>(Sales, ChannelKey, Channel) <span class="sc">%&gt;%</span></span>
+<span id="cb193-13"><a href="import.html#cb193-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dm_add_fk</span>(Sales, StoreKey, Stores) <span class="sc">%&gt;%</span></span>
+<span id="cb193-14"><a href="import.html#cb193-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dm_add_fk</span>(Sales, PromotionKey, Promotion) <span class="sc">%&gt;%</span></span>
+<span id="cb193-15"><a href="import.html#cb193-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dm_add_fk</span>(Sales, ProductKey, Product) <span class="sc">%&gt;%</span></span>
+<span id="cb193-16"><a href="import.html#cb193-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dm_add_fk</span>(Product, ProductSubcategoryKey, ProductSubCategory) <span class="sc">%&gt;%</span></span>
+<span id="cb193-17"><a href="import.html#cb193-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dm_add_fk</span>(ProductSubCategory, ProductCategoryKey, ProductCategory) <span class="sc">%&gt;%</span> </span>
+<span id="cb193-18"><a href="import.html#cb193-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dm_add_fk</span>(Stores, GeographyKey, Geography) </span>
+<span id="cb193-19"><a href="import.html#cb193-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb193-20"><a href="import.html#cb193-20" aria-hidden="true" tabindex="-1"></a>stlidb_dm_keys <span class="sc">%&gt;%</span></span>
+<span id="cb193-21"><a href="import.html#cb193-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dm_set_colors</span>(<span class="at">lightgreen =</span> <span class="fu">c</span>(Channel, Promotion, Stores, Geography), </span>
+<span id="cb193-22"><a href="import.html#cb193-22" aria-hidden="true" tabindex="-1"></a>                <span class="at">lightpink =</span> <span class="fu">c</span>(Product, ProductCategory, ProductSubCategory), </span>
+<span id="cb193-23"><a href="import.html#cb193-23" aria-hidden="true" tabindex="-1"></a>                <span class="at">grey =</span> Sales) <span class="sc">%&gt;%</span></span>
+<span id="cb193-24"><a href="import.html#cb193-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dm_draw</span>(<span class="at">view_type =</span> <span class="st">&#39;all&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="import.html#cb194-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;img/dm.png&quot;</span>)</span></code></pre></div>
 <p><img src="img/dm.png" width="960" /></p>
 </div>
 <div id="join-tables" class="section level3" number="3.1.3">
 <h3><span class="header-section-number">3.1.3</span> Join tables</h3>
 <p>Sales table needs to be joined to other tables by primary and foreign keys to eventually obtain the required view of the data. Then, write the combined dataset out as a csv file. If you take a closer look at data, many of its columns are not meaningful or redundant. After removed those unused columns, the sales_df.csv is a final clean dataset on which we will use perform analysis.</p>
-<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="import.html#cb194-1" aria-hidden="true" tabindex="-1"></a>sales <span class="ot">&lt;-</span> stlidb_dm_keys <span class="sc">%&gt;%</span> <span class="fu">dm_squash_to_tbl</span>(Sales) <span class="sc">%&gt;%</span> <span class="fu">collect</span>()</span>
-<span id="cb194-2"><a href="import.html#cb194-2" aria-hidden="true" tabindex="-1"></a>data.table<span class="sc">::</span><span class="fu">fwrite</span>(sales, here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&#39;data/sales.csv&#39;</span>))</span></code></pre></div>
-<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="import.html#cb195-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste0</span>(<span class="st">&#39;The dataset is &#39;</span>, <span class="fu">round</span>(<span class="fu">file.size</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&#39;data/sales.csv&#39;</span>))<span class="sc">/</span><span class="dv">1000000</span>, <span class="dv">2</span>), <span class="st">&quot; MB&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="import.html#cb195-1" aria-hidden="true" tabindex="-1"></a>sales <span class="ot">&lt;-</span> stlidb_dm_keys <span class="sc">%&gt;%</span> <span class="fu">dm_squash_to_tbl</span>(Sales) <span class="sc">%&gt;%</span> <span class="fu">collect</span>()</span>
+<span id="cb195-2"><a href="import.html#cb195-2" aria-hidden="true" tabindex="-1"></a>data.table<span class="sc">::</span><span class="fu">fwrite</span>(sales, here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&#39;data/sales.csv&#39;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="import.html#cb196-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste0</span>(<span class="st">&#39;The dataset is &#39;</span>, <span class="fu">round</span>(<span class="fu">file.size</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&#39;data/sales.csv&#39;</span>))<span class="sc">/</span><span class="dv">1000000</span>, <span class="dv">2</span>), <span class="st">&quot; MB&quot;</span>)</span></code></pre></div>
 <pre><code>&gt; [1] &quot;The dataset is 63.81 MB&quot;</code></pre>
-<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="import.html#cb197-1" aria-hidden="true" tabindex="-1"></a>sales <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&#39;data/sales.csv&#39;</span>))</span>
-<span id="cb197-2"><a href="import.html#cb197-2" aria-hidden="true" tabindex="-1"></a><span class="fu">map_dbl</span>(sales, <span class="sc">~</span><span class="fu">length</span>(<span class="fu">unique</span>(.x)))</span></code></pre></div>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="import.html#cb198-1" aria-hidden="true" tabindex="-1"></a>sales <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&#39;data/sales.csv&#39;</span>))</span>
+<span id="cb198-2"><a href="import.html#cb198-2" aria-hidden="true" tabindex="-1"></a><span class="fu">map_dbl</span>(sales, <span class="sc">~</span><span class="fu">length</span>(<span class="fu">unique</span>(.x)))</span></code></pre></div>
 <pre><code>&gt;              SalesKey               DateKey            ChannelKey 
 &gt;                155732                     1                     4 
 &gt;              StoreKey            ProductKey          PromotionKey 
@@ -363,25 +357,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 &gt;                     3                    47                    15 
 &gt;         GeographyType         ContinentName     RegionCountryName 
 &gt;                     1                     3                    34</code></pre>
-<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="import.html#cb199-1" aria-hidden="true" tabindex="-1"></a>remove_col <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;SalesKey&#39;</span>, <span class="st">&#39;DateKey&#39;</span>, <span class="st">&#39;ChannelKey&#39;</span>, <span class="st">&#39;StoreKey&#39;</span>, <span class="st">&#39;ProductKey&#39;</span>, <span class="st">&#39;PromotionKey&#39;</span>, </span>
-<span id="cb199-2"><a href="import.html#cb199-2" aria-hidden="true" tabindex="-1"></a>                <span class="st">&#39;ProductCategoryKey&#39;</span>, <span class="st">&quot;ProductSubcategoryKey&quot;</span>, <span class="st">&#39;GeographyKey&#39;</span>, </span>
-<span id="cb199-3"><a href="import.html#cb199-3" aria-hidden="true" tabindex="-1"></a>                <span class="st">&#39;ProductDescription&#39;</span>, <span class="st">&quot;PromotionLabel&quot;</span>, <span class="st">&#39;CloseReason&#39;</span>, <span class="st">&#39;GeographyType&#39;</span>, </span>
-<span id="cb199-4"><a href="import.html#cb199-4" aria-hidden="true" tabindex="-1"></a>                <span class="st">&#39;Product.UnitCost&#39;</span>, <span class="st">&#39;Product.UnitPrice&#39;</span>)</span>
-<span id="cb199-5"><a href="import.html#cb199-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb199-6"><a href="import.html#cb199-6" aria-hidden="true" tabindex="-1"></a>select_col <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;Sales.UnitPrice&#39;</span>, <span class="st">&#39;SalesQuantity&#39;</span>, <span class="st">&#39;SalesAmount&#39;</span>, <span class="st">&#39;Sales.UnitCost&#39;</span>, <span class="st">&#39;TotalCost&#39;</span>,  </span>
-<span id="cb199-7"><a href="import.html#cb199-7" aria-hidden="true" tabindex="-1"></a>                <span class="st">&#39;ReturnQuantity&#39;</span>, <span class="st">&#39;ReturnAmount&#39;</span>, </span>
-<span id="cb199-8"><a href="import.html#cb199-8" aria-hidden="true" tabindex="-1"></a>                <span class="st">&#39;DiscountQuantity&#39;</span>, <span class="st">&#39;DiscountAmount&#39;</span>, <span class="st">&quot;DiscountPercent&quot;</span>, </span>
-<span id="cb199-9"><a href="import.html#cb199-9" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;PromotionName&quot;</span>, <span class="st">&#39;StartDate&#39;</span>, <span class="st">&#39;EndDate&#39;</span>,</span>
-<span id="cb199-10"><a href="import.html#cb199-10" aria-hidden="true" tabindex="-1"></a>                <span class="st">&#39;ChannelName&#39;</span>, <span class="st">&#39;StoreType&#39;</span>, <span class="st">&#39;StoreName&#39;</span>, <span class="st">&#39;Status&#39;</span>, <span class="st">&#39;EmployeeCount&#39;</span>, <span class="st">&#39;SellingAreaSize&#39;</span>,  </span>
-<span id="cb199-11"><a href="import.html#cb199-11" aria-hidden="true" tabindex="-1"></a>                <span class="st">&#39;ContinentName&#39;</span>, <span class="st">&#39;RegionCountryName&#39;</span>, </span>
-<span id="cb199-12"><a href="import.html#cb199-12" aria-hidden="true" tabindex="-1"></a>                <span class="st">&#39;ProductName&#39;</span>, <span class="st">&#39;ProductSubcategory&#39;</span>, <span class="st">&#39;ProductCategory&#39;</span>, <span class="st">&#39;Manufacturer&#39;</span>, <span class="st">&#39;BrandName&#39;</span>, <span class="st">&#39;ClassName&#39;</span>)</span>
-<span id="cb199-13"><a href="import.html#cb199-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb199-14"><a href="import.html#cb199-14" aria-hidden="true" tabindex="-1"></a>removed <span class="ot">&lt;-</span> (<span class="fu">names</span>(sales) <span class="sc">%&gt;%</span> <span class="fu">setdiff</span>(select_col))</span>
-<span id="cb199-15"><a href="import.html#cb199-15" aria-hidden="true" tabindex="-1"></a><span class="fu">all</span>(removed <span class="sc">%in%</span> remove_col)</span></code></pre></div>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="import.html#cb200-1" aria-hidden="true" tabindex="-1"></a>remove_col <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;SalesKey&#39;</span>, <span class="st">&#39;DateKey&#39;</span>, <span class="st">&#39;ChannelKey&#39;</span>, <span class="st">&#39;StoreKey&#39;</span>, <span class="st">&#39;ProductKey&#39;</span>, <span class="st">&#39;PromotionKey&#39;</span>, </span>
+<span id="cb200-2"><a href="import.html#cb200-2" aria-hidden="true" tabindex="-1"></a>                <span class="st">&#39;ProductCategoryKey&#39;</span>, <span class="st">&quot;ProductSubcategoryKey&quot;</span>, <span class="st">&#39;GeographyKey&#39;</span>, </span>
+<span id="cb200-3"><a href="import.html#cb200-3" aria-hidden="true" tabindex="-1"></a>                <span class="st">&#39;ProductDescription&#39;</span>, <span class="st">&quot;PromotionLabel&quot;</span>, <span class="st">&#39;CloseReason&#39;</span>, <span class="st">&#39;GeographyType&#39;</span>, </span>
+<span id="cb200-4"><a href="import.html#cb200-4" aria-hidden="true" tabindex="-1"></a>                <span class="st">&#39;Product.UnitCost&#39;</span>, <span class="st">&#39;Product.UnitPrice&#39;</span>)</span>
+<span id="cb200-5"><a href="import.html#cb200-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb200-6"><a href="import.html#cb200-6" aria-hidden="true" tabindex="-1"></a>select_col <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;Sales.UnitPrice&#39;</span>, <span class="st">&#39;SalesQuantity&#39;</span>, <span class="st">&#39;SalesAmount&#39;</span>, <span class="st">&#39;Sales.UnitCost&#39;</span>, <span class="st">&#39;TotalCost&#39;</span>,  </span>
+<span id="cb200-7"><a href="import.html#cb200-7" aria-hidden="true" tabindex="-1"></a>                <span class="st">&#39;ReturnQuantity&#39;</span>, <span class="st">&#39;ReturnAmount&#39;</span>, </span>
+<span id="cb200-8"><a href="import.html#cb200-8" aria-hidden="true" tabindex="-1"></a>                <span class="st">&#39;DiscountQuantity&#39;</span>, <span class="st">&#39;DiscountAmount&#39;</span>, <span class="st">&quot;DiscountPercent&quot;</span>, </span>
+<span id="cb200-9"><a href="import.html#cb200-9" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;PromotionName&quot;</span>, <span class="st">&#39;StartDate&#39;</span>, <span class="st">&#39;EndDate&#39;</span>,</span>
+<span id="cb200-10"><a href="import.html#cb200-10" aria-hidden="true" tabindex="-1"></a>                <span class="st">&#39;ChannelName&#39;</span>, <span class="st">&#39;StoreType&#39;</span>, <span class="st">&#39;StoreName&#39;</span>, <span class="st">&#39;Status&#39;</span>, <span class="st">&#39;EmployeeCount&#39;</span>, <span class="st">&#39;SellingAreaSize&#39;</span>,  </span>
+<span id="cb200-11"><a href="import.html#cb200-11" aria-hidden="true" tabindex="-1"></a>                <span class="st">&#39;ContinentName&#39;</span>, <span class="st">&#39;RegionCountryName&#39;</span>, </span>
+<span id="cb200-12"><a href="import.html#cb200-12" aria-hidden="true" tabindex="-1"></a>                <span class="st">&#39;ProductName&#39;</span>, <span class="st">&#39;ProductSubcategory&#39;</span>, <span class="st">&#39;ProductCategory&#39;</span>, <span class="st">&#39;Manufacturer&#39;</span>, <span class="st">&#39;BrandName&#39;</span>, <span class="st">&#39;ClassName&#39;</span>)</span>
+<span id="cb200-13"><a href="import.html#cb200-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb200-14"><a href="import.html#cb200-14" aria-hidden="true" tabindex="-1"></a>removed <span class="ot">&lt;-</span> (<span class="fu">names</span>(sales) <span class="sc">%&gt;%</span> <span class="fu">setdiff</span>(select_col))</span>
+<span id="cb200-15"><a href="import.html#cb200-15" aria-hidden="true" tabindex="-1"></a><span class="fu">all</span>(removed <span class="sc">%in%</span> remove_col)</span></code></pre></div>
 <pre><code>&gt; [1] TRUE</code></pre>
-<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="import.html#cb201-1" aria-hidden="true" tabindex="-1"></a>sales_df <span class="ot">&lt;-</span> sales <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="fu">all_of</span>(select_col))</span>
-<span id="cb201-2"><a href="import.html#cb201-2" aria-hidden="true" tabindex="-1"></a>data.table<span class="sc">::</span><span class="fu">fwrite</span>(sales_df, here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&#39;data/sales_df.csv&#39;</span>))</span></code></pre></div>
-<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="import.html#cb202-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste0</span>(<span class="st">&#39;The dataset is &#39;</span>, <span class="fu">round</span>(<span class="fu">file.size</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&#39;data/sales_df.csv&#39;</span>))<span class="sc">/</span><span class="dv">1000000</span>, <span class="dv">2</span>), <span class="st">&quot; MB&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="import.html#cb202-1" aria-hidden="true" tabindex="-1"></a>sales_df <span class="ot">&lt;-</span> sales <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="fu">all_of</span>(select_col))</span>
+<span id="cb202-2"><a href="import.html#cb202-2" aria-hidden="true" tabindex="-1"></a>data.table<span class="sc">::</span><span class="fu">fwrite</span>(sales_df, here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&#39;data/sales_df.csv&#39;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="import.html#cb203-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste0</span>(<span class="st">&#39;The dataset is &#39;</span>, <span class="fu">round</span>(<span class="fu">file.size</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&#39;data/sales_df.csv&#39;</span>))<span class="sc">/</span><span class="dv">1000000</span>, <span class="dv">2</span>), <span class="st">&quot; MB&quot;</span>)</span></code></pre></div>
 <pre><code>&gt; [1] &quot;The dataset is 44.69 MB&quot;</code></pre>
 </div>
 </div>
@@ -390,12 +384,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>R can connect to various databases. It becomes more common to load data into a database and write queries in SQL and R interchangeably in a R session. This section shows a brief example.</p>
 <div id="connection" class="section level3" number="3.2.1">
 <h3><span class="header-section-number">3.2.1</span> Connection</h3>
-<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="import.html#cb204-1" aria-hidden="true" tabindex="-1"></a>con <span class="ot">&lt;-</span> DBI<span class="sc">::</span><span class="fu">dbConnect</span>(RSQLite<span class="sc">::</span><span class="fu">SQLite</span>(), <span class="at">dbname =</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;supplements/sales_df.db&quot;</span>))</span></code></pre></div>
-<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="import.html#cb205-1" aria-hidden="true" tabindex="-1"></a>DBI<span class="sc">::</span><span class="fu">dbWriteTable</span>(con, <span class="st">&quot;sales_df&quot;</span>, sales_df, <span class="at">overwrite =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="import.html#cb206-1" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">copy_to</span>(con, mtcars, <span class="st">&quot;mtcars&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="import.html#cb207-1" aria-hidden="true" tabindex="-1"></a>DBI<span class="sc">::</span><span class="fu">dbListTables</span>(con)</span></code></pre></div>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="import.html#cb205-1" aria-hidden="true" tabindex="-1"></a>con <span class="ot">&lt;-</span> DBI<span class="sc">::</span><span class="fu">dbConnect</span>(RSQLite<span class="sc">::</span><span class="fu">SQLite</span>(), <span class="at">dbname =</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;supplements/sales_df.db&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="import.html#cb206-1" aria-hidden="true" tabindex="-1"></a>DBI<span class="sc">::</span><span class="fu">dbWriteTable</span>(con, <span class="st">&quot;sales_df&quot;</span>, sales_df, <span class="at">overwrite =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="import.html#cb207-1" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">copy_to</span>(con, mtcars, <span class="st">&quot;mtcars&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="import.html#cb208-1" aria-hidden="true" tabindex="-1"></a>DBI<span class="sc">::</span><span class="fu">dbListTables</span>(con)</span></code></pre></div>
 <pre><code>&gt; [1] &quot;sales_df&quot;</code></pre>
-<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="import.html#cb209-1" aria-hidden="true" tabindex="-1"></a>DBI<span class="sc">::</span><span class="fu">dbListFields</span>(con, <span class="st">&#39;sales_df&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="import.html#cb210-1" aria-hidden="true" tabindex="-1"></a>DBI<span class="sc">::</span><span class="fu">dbListFields</span>(con, <span class="st">&#39;sales_df&#39;</span>)</span></code></pre></div>
 <pre><code>&gt;  [1] &quot;sales_unit_price&quot;    &quot;sales_quantity&quot;      &quot;sales_amount&quot;       
 &gt;  [4] &quot;sales_unit_cost&quot;     &quot;total_cost&quot;          &quot;return_quantity&quot;    
 &gt;  [7] &quot;return_amount&quot;       &quot;discount_quantity&quot;   &quot;discount_amount&quot;    
@@ -408,14 +402,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="r-code-chunk" class="section level3" number="3.2.2">
 <h3><span class="header-section-number">3.2.2</span> R code chunk</h3>
-<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="import.html#cb211-1" aria-hidden="true" tabindex="-1"></a>DBI<span class="sc">::</span><span class="fu">dbGetQuery</span>(con, <span class="st">&#39;SELECT sales_unit_price, product_category, store_type FROM sales_df LIMIT 3&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="import.html#cb212-1" aria-hidden="true" tabindex="-1"></a>DBI<span class="sc">::</span><span class="fu">dbGetQuery</span>(con, <span class="st">&#39;SELECT sales_unit_price, product_category, store_type FROM sales_df LIMIT 3&#39;</span>)</span></code></pre></div>
 <pre><code>&gt;   sales_unit_price product_category store_type
 &gt; 1           299.00      Cell phones      Store
 &gt; 2            38.99      Cell phones      Store
 &gt; 3            16.99      Cell phones      Store</code></pre>
-<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="import.html#cb213-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tbl</span>(con, <span class="st">&quot;sales_df&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb213-2"><a href="import.html#cb213-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(sales_unit_price, product_category, store_type) <span class="sc">%&gt;%</span> </span>
-<span id="cb213-3"><a href="import.html#cb213-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(sales_unit_price <span class="sc">&gt;</span> <span class="dv">2800</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb214-1"><a href="import.html#cb214-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tbl</span>(con, <span class="st">&quot;sales_df&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb214-2"><a href="import.html#cb214-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(sales_unit_price, product_category, store_type) <span class="sc">%&gt;%</span> </span>
+<span id="cb214-3"><a href="import.html#cb214-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(sales_unit_price <span class="sc">&gt;</span> <span class="dv">2800</span>)</span></code></pre></div>
 <pre><code>&gt; # Source:   lazy query [?? x 3]
 &gt; # Database: sqlite 3.34.0 [C:\Users\Stewart
 &gt; #   Li\Dropbox\_rauditsolutionllp\github\rauditbook\crcbook\rauditbookdown\supplements\sales_df.db]
@@ -432,26 +426,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 &gt;  9            2900. TV and Video     Reseller  
 &gt; 10            2900. TV and Video     Online    
 &gt; # ... with more rows</code></pre>
-<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="import.html#cb215-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tbl</span>(con, <span class="st">&quot;sales_df&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb215-2"><a href="import.html#cb215-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(sales_unit_price, product_category, store_type) <span class="sc">%&gt;%</span> </span>
-<span id="cb215-3"><a href="import.html#cb215-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(sales_unit_price <span class="sc">&gt;</span> <span class="dv">2800</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb215-4"><a href="import.html#cb215-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">show_query</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb215-5"><a href="import.html#cb215-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">capture.output</span>() <span class="sc">%&gt;%</span>                               </span>
-<span id="cb215-6"><a href="import.html#cb215-6" aria-hidden="true" tabindex="-1"></a>  .[<span class="dv">2</span><span class="sc">:</span><span class="fu">length</span>(.)] <span class="sc">%&gt;%</span> </span>
-<span id="cb215-7"><a href="import.html#cb215-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_replace_all</span>(<span class="st">&quot;`&quot;</span>, <span class="st">&quot;&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb215-8"><a href="import.html#cb215-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_c</span>(<span class="at">collapse =</span> <span class="st">&quot; &quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb216-1"><a href="import.html#cb216-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tbl</span>(con, <span class="st">&quot;sales_df&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb216-2"><a href="import.html#cb216-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(sales_unit_price, product_category, store_type) <span class="sc">%&gt;%</span> </span>
+<span id="cb216-3"><a href="import.html#cb216-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(sales_unit_price <span class="sc">&gt;</span> <span class="dv">2800</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb216-4"><a href="import.html#cb216-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">show_query</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb216-5"><a href="import.html#cb216-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">capture.output</span>() <span class="sc">%&gt;%</span>                               </span>
+<span id="cb216-6"><a href="import.html#cb216-6" aria-hidden="true" tabindex="-1"></a>  .[<span class="dv">2</span><span class="sc">:</span><span class="fu">length</span>(.)] <span class="sc">%&gt;%</span> </span>
+<span id="cb216-7"><a href="import.html#cb216-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_replace_all</span>(<span class="st">&quot;`&quot;</span>, <span class="st">&quot;&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb216-8"><a href="import.html#cb216-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_c</span>(<span class="at">collapse =</span> <span class="st">&quot; &quot;</span>)</span></code></pre></div>
 <pre><code>&gt; [1] &quot;SELECT * FROM (SELECT sales_unit_price, product_category, store_type FROM sales_df) WHERE (sales_unit_price &gt; 2800.0)&quot;</code></pre>
 </div>
 <div id="sql-code-chunk" class="section level3" number="3.2.3">
 <h3><span class="header-section-number">3.2.3</span> SQL code chunk</h3>
-<div class="sourceCode" id="cb217"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb217-1"><a href="import.html#cb217-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- This is a SQL comment</span></span>
-<span id="cb217-2"><a href="import.html#cb217-2" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> sales_unit_price, product_category, store_type </span>
-<span id="cb217-3"><a href="import.html#cb217-3" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> sales_df</span>
-<span id="cb217-4"><a href="import.html#cb217-4" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> sales_unit_price <span class="op">&gt;</span> <span class="dv">2800</span></span>
-<span id="cb217-5"><a href="import.html#cb217-5" aria-hidden="true" tabindex="-1"></a><span class="kw">LIMIT</span> <span class="dv">3</span></span></code></pre></div>
+<div class="sourceCode" id="cb218"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb218-1"><a href="import.html#cb218-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- This is a SQL comment</span></span>
+<span id="cb218-2"><a href="import.html#cb218-2" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> sales_unit_price, product_category, store_type </span>
+<span id="cb218-3"><a href="import.html#cb218-3" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> sales_df</span>
+<span id="cb218-4"><a href="import.html#cb218-4" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> sales_unit_price <span class="op">&gt;</span> <span class="dv">2800</span></span>
+<span id="cb218-5"><a href="import.html#cb218-5" aria-hidden="true" tabindex="-1"></a><span class="kw">LIMIT</span> <span class="dv">3</span></span></code></pre></div>
 <div class="knitsql-table">
 <table>
-<caption><span id="tab:unnamed-chunk-77">Table 3.1: </span>3 records</caption>
+<caption><span id="tab:unnamed-chunk-78">Table 3.1: </span>3 records</caption>
 <thead>
 <tr class="header">
 <th align="right">sales_unit_price</th>
@@ -478,18 +472,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tbody>
 </table>
 </div>
-<div class="sourceCode" id="cb218"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb218-1"><a href="import.html#cb218-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> sales_unit_price, product_category, store_type, <span class="fu">AVG</span>(sales_unit_price) <span class="kw">OVER</span> (<span class="kw">PARTITION</span> <span class="kw">BY</span> product_category) <span class="kw">AS</span> avg_price, <span class="fu">MAX</span>(sales_unit_price) <span class="kw">OVER</span> (<span class="kw">PARTITION</span> <span class="kw">BY</span> product_category) <span class="kw">AS</span> max_price</span>
-<span id="cb218-2"><a href="import.html#cb218-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> sales_df</span>
-<span id="cb218-3"><a href="import.html#cb218-3" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> store_type <span class="kw">IN</span> (<span class="st">&#39;Store&#39;</span>, <span class="st">&#39;Online&#39;</span>)</span>
-<span id="cb218-4"><a href="import.html#cb218-4" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> product_category, store_type</span>
-<span id="cb218-5"><a href="import.html#cb218-5" aria-hidden="true" tabindex="-1"></a><span class="kw">LIMIT</span> <span class="dv">3</span>;</span></code></pre></div>
-<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="import.html#cb219-1" aria-hidden="true" tabindex="-1"></a>max_price</span></code></pre></div>
+<div class="sourceCode" id="cb219"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb219-1"><a href="import.html#cb219-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> sales_unit_price, product_category, store_type, <span class="fu">AVG</span>(sales_unit_price) <span class="kw">OVER</span> (<span class="kw">PARTITION</span> <span class="kw">BY</span> product_category) <span class="kw">AS</span> avg_price, <span class="fu">MAX</span>(sales_unit_price) <span class="kw">OVER</span> (<span class="kw">PARTITION</span> <span class="kw">BY</span> product_category) <span class="kw">AS</span> max_price</span>
+<span id="cb219-2"><a href="import.html#cb219-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> sales_df</span>
+<span id="cb219-3"><a href="import.html#cb219-3" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> store_type <span class="kw">IN</span> (<span class="st">&#39;Store&#39;</span>, <span class="st">&#39;Online&#39;</span>)</span>
+<span id="cb219-4"><a href="import.html#cb219-4" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> product_category, store_type</span>
+<span id="cb219-5"><a href="import.html#cb219-5" aria-hidden="true" tabindex="-1"></a><span class="kw">LIMIT</span> <span class="dv">3</span>;</span></code></pre></div>
+<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="import.html#cb220-1" aria-hidden="true" tabindex="-1"></a>max_price</span></code></pre></div>
 <pre><code>&gt;   sales_unit_price product_category store_type avg_price max_price
 &gt; 1            21.57            Audio     Online   115.901    299.23
 &gt; 2            37.95            Audio     Online   115.901    299.23
 &gt; 3            67.40            Audio     Online   115.901    299.23</code></pre>
 <p>You can run an external SQL file inside of code chunk. The result will show up when you knit the document. However, you can preview SQL query result.</p>
-<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="import.html#cb221-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(readr<span class="sc">::</span><span class="fu">read_file</span>(<span class="st">&quot;supplements/test.sql&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="import.html#cb222-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(readr<span class="sc">::</span><span class="fu">read_file</span>(<span class="st">&quot;supplements/test.sql&quot;</span>))</span></code></pre></div>
 <pre><code>&gt; -- !preview conn=con
 &gt; 
 &gt; SELECT * FROM sales_df LIMIT 6</code></pre>
@@ -501,8 +495,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 &lt;!-- ```{r eval=FALSE} --&gt;
 &lt;!-- sales_df_preview --&gt;
 &lt;!-- ``` --&gt;</code></pre>
-<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="import.html#cb224-1" aria-hidden="true" tabindex="-1"></a>DBI<span class="sc">::</span><span class="fu">dbDisconnect</span>(con)</span></code></pre></div>
-<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="import.html#cb225-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;img/sqlite_02.png&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="import.html#cb225-1" aria-hidden="true" tabindex="-1"></a>DBI<span class="sc">::</span><span class="fu">dbDisconnect</span>(con)</span></code></pre></div>
+<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="import.html#cb226-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;img/sqlite_02.png&quot;</span>)</span></code></pre></div>
 <p><img src="img/sqlite_02.png" width="960" /></p>
 
 </div>

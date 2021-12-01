@@ -37,20 +37,33 @@ out <- sales_df %>%
     end_date - start_date < 365) 
   
 summary(out)
-plot(out)
-
 v_amt <- validate::violating(sales_df, out[10:11]) 
 v_date <- validate::violating(sales_df, out[17]) 
+```
+
+
+```{r fpa_validation_p1, eval=FALSE}
+plot(out)
+```
+
+
+```{r}
+knitr::include_graphics("img/fpa_validation_p1.png")
 ```
 
 
 Surprisingly, sales unit price multiply with sales quantity does not equal to sales amount. Those outlier are `filter` out to be examined in detail. If you were an external auditor and should pay a special attention to those as the sum of those immaterial misstatements becomes significantly material. Furthermore, it is unusual that promotion period (end date minus start date) is more than one year. It could be an error that stores whose status is off incur staff and rental cost. Since the illustration based on dummy data, those discreteness will be ignored subsequently.  
 
 
-```{r}
+```{r fpa_validation_p2, eval=FALSE}
 sales_df[sample(nrow(sales_df), 2000), ] %>% 
   ggplot(aes(x = sales_amount, y = sales_unit_price * sales_quantity)) +
   geom_point(size = 1, alpha = 0.2) 
+```
+
+
+```{r}
+knitr::include_graphics('img/fpa_validation_p2.png')
 ```
 
 
@@ -160,7 +173,7 @@ ftable(table(sales_df$manufacturer, sales_df$product_category, sales_df$class_na
 Plot categorical variables based on frequency count. Refer to [ggplot2: elegant graphics for data analysis](https://ggplot2-book.org/) to learn how to plot.
 
 
-```{r}
+```{r fpa_eda_p1, eval=FALSE}
 sales_df%>% 
   ggplot(aes(x = class_name, fill = class_name)) +
   geom_bar(width = .2, show.legend = FALSE) +
@@ -171,6 +184,11 @@ sales_df%>%
 
 
 ```{r}
+knitr::include_graphics("img/fpa_eda_p1.png")
+```
+
+
+```{r fpa_eda_p2, eval=FALSE}
 sales_df %>% 
   count(product_category, class_name, manufacturer, store_type) %>% 
   pivot_longer(-n, 
@@ -182,6 +200,11 @@ sales_df %>%
   tidytext::scale_y_reordered() +
   facet_wrap(~var, scales = 'free_y') +
   labs(x = NULL, y = NULL)
+```
+
+
+```{r}
+knitr::include_graphics("img/fpa_eda_p2.png")
 ```
 
 
@@ -245,7 +268,7 @@ Plot numeric variables.
 2. Most of sales is below 100. Popular products have price below 500 and cost below 250. 
 
 
-```{r}
+```{r fpa_eda_p3, eval=FALSE}
 sales_df %>% 
   ggplot(aes(sales_unit_price)) +
   geom_histogram(aes(y = ..density..), binwidth = 35) +
@@ -255,10 +278,20 @@ sales_df %>%
 
 
 ```{r}
+knitr::include_graphics("img/fpa_eda_p3.png")
+```
+
+
+```{r fpa_eda_p4, eval=FALSE}
 sales_df %>% 
   ggplot(aes(sales_unit_price, sales_unit_cost, z = sales_quantity)) +
   stat_summary_hex(bins = 35, alpha = 0.5) +
   geom_smooth() 
+```
+
+
+```{r}
+knitr::include_graphics("img/fpa_eda_p4.png")
 ```
 
 
@@ -429,7 +462,7 @@ sales_df %>%
 ```
 
 
-```{r}
+```{r fpa_biz_p1, eval=FALSE}
 product_df <- sales_df %>% 
   group_by(product_category, product_subcategory, product_name) %>% 
   summarise(across(c(sales_quantity, sales_amount, total_cost, return_amount, discount_amount), sum), 
@@ -448,13 +481,18 @@ product_df <- sales_df %>%
 ```
 
 
+```{r}
+knitr::include_graphics("img/fpa_biz_p1.png")
+```
+
+
 ### Manufactuer
 
 1. Identify the outlier of sales unit price based on manufacturer.
 2. `summarize` total sales amount and percentage of products purchased from manufacturers within each product category and `ggplot` barchart.
 
 
-```{r}
+```{r fpa_biz_p2, eval=FALSE}
 sales_df %>% 
   mutate(manufacturer = fct_reorder(manufacturer, sales_unit_price)) %>% 
   ggplot(aes(sales_unit_price, manufacturer), alpha = .3) +
@@ -463,6 +501,11 @@ sales_df %>%
 
 
 ```{r}
+knitr::include_graphics("img/fpa_biz_p2.png")
+```
+
+
+```{r fpa_biz_p3, eval=FALSE}
 supplier_df <- sales_df %>% 
   group_by(manufacturer, product_category) %>% 
   summarise(total_sales_amount = sum(sales_amount), 
@@ -490,13 +533,18 @@ text_df <- tibble(manufacturer = unique(supplier_df$manufacturer),
 ```
 
 
+```{r}
+knitr::include_graphics("img/fpa_biz_p3.png")
+```
+
+
 ### Store
 
 1. Calculate total sales amount for each store name. `ggplot` employee count and selling area size to identify outlier. For instance, one small store has more than 300 staffs.
 2. Map store location across the world.
 
 
-```{r}
+```{r fpa_biz_p4, eval=FALSE}
 staff_df <- sales_df %>% 
   group_by(store_name) %>% 
   mutate(total_sales_amount = sum(sales_amount)) %>% 
@@ -515,6 +563,11 @@ staff_df %>%
 
 
 ```{r}
+knitr::include_graphics("img/fpa_biz_p4.png")
+```
+
+
+```{r fpa_biz_p5, eval=FALSE}
 store_map <- map_data("world") %>% 
   mutate(region = case_when(region == 'USA' ~ "United States", 
                             region == 'UK' ~ "United Kingdom", 
@@ -539,6 +592,11 @@ store_map <- map_data("world") %>%
                                barheight = unit(0.2, "cm"), 
                                barwidth = unit(4, "cm"))) +
   labs(fill = "Total sales")) 
+```
+
+
+```{r}
+knitr::include_graphics("img/fpa_biz_p5.png")
 ```
 
 

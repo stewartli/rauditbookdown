@@ -6,14 +6,22 @@ date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
-# url: your book url like https://bookdown.org/yihui/bookdown
-cover-image: "img/cover.jpg"
+# include_uncited: |
+#   @tidyverse, @data.table, @lubridate, @httr, @rvest, @usethis, @cli, @crayon,
+#   @R6,  @validate, @cowsay, @pdftools, @janitor, @skimr, @visdat, @naniar, 
+#   @DBI, @RSQLite, @dm, @dbplyr, 
+#   @knitr, @rmarkdown, @tinytex, @kableExtra, @DT, @formattable, 
+#   @unpivotr, @tidyxl, @readxl, @openxlsx,  
+#   @igraph, @ggraph, @tidygraph, @ggforce, @patchwork, @treemap,  @table1, 
+#   @shiny, @shinyWidgets, @bslib, @thematic, 
+#   @tidytext, @wordcloud2, @collapsibleTree, @data.tree, 
+#   @benford.analysis, @corrplot, @widyr, @vcd, @psych
+url: https://github.com/stewartli/rauditbookdown
+# cover-image: "docs/img/cover.jpg"
 description: |
-  This is a minimal example of using the bookdown package to write a book.
-  The HTML output format for this example is bookdown::gitbook,
-  set in the _output.yml file.
+  A complete use case for accounting professionals who want to leverage computer programming languages in their work.
 link-citations: yes
-# github-repo: rstudio/bookdown-demo
+github-repo: https://github.com/stewartli/rauditbookdown
 ---
 
 
@@ -25,12 +33,13 @@ library(tidyverse)
 ```
 
 
+<div style='background: radial-gradient(ellipse farthest-corner at 45px 45px, #bbcfd7, #d2c8bc); border-radius: 10px 50px 50px 10px;'>
+
 # About the Author{-}
 
-[Stewart Li](https://stewartli.github.io/tailwindcss/) is a consultant with [RAudit Solution LLP](https://stewartli.github.io/tailwindcss/). He is a Chartered Accountant and specialized in data analytics and data science in the area of internal control and forensic accounting. Visit the website to see his work. 
+[Stewart Li](https://stewartli.github.io/tailwindcss/) is a consultant. He is a Chartered Accountant and specialized in data analytics and data science in the area of accounting, auditing, internal control and forensic accounting. Visit [the website](https://stewartli.github.io/tailwindcss/) to see his work. 
 
-
-
+</div>
 
 
 

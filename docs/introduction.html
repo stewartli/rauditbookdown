@@ -5,32 +5,26 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 1 Introduction | Data Analytics in R</title>
-  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
-The HTML output format for this example is bookdown::gitbook,
-set in the _output.yml file.</p>" />
+  <meta name="description" content="A complete use case for accounting professionals who want to leverage computer programming languages in their work." />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 1 Introduction | Data Analytics in R" />
   <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://github.com/stewartli/rauditbookdown" />
   
-  <meta property="og:image" content="/img/cover.jpg" />
-  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
-The HTML output format for this example is bookdown::gitbook,
-set in the _output.yml file.</p>" />
-  
+  <meta property="og:description" content="A complete use case for accounting professionals who want to leverage computer programming languages in their work." />
+  <meta name="github-repo" content="https://github.com/stewartli/rauditbookdown" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Chapter 1 Introduction | Data Analytics in R" />
   
-  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
-The HTML output format for this example is bookdown::gitbook,
-set in the _output.yml file.</p>" />
-  <meta name="twitter:image" content="/img/cover.jpg" />
+  <meta name="twitter:description" content="A complete use case for accounting professionals who want to leverage computer programming languages in their work." />
+  
 
 <meta name="author" content="Stewart Li" />
 
 
-<meta name="date" content="2021-11-30" />
+<meta name="date" content="2021-12-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -285,7 +279,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-19"><a href="introduction.html#cb1-19" aria-hidden="true" tabindex="-1"></a>  ggraph<span class="sc">::</span><span class="fu">geom_edge_diagonal</span>() <span class="sc">+</span></span>
 <span id="cb1-20"><a href="introduction.html#cb1-20" aria-hidden="true" tabindex="-1"></a>  ggraph<span class="sc">::</span><span class="fu">geom_node_label</span>(<span class="fu">aes</span>(<span class="at">label =</span> name), <span class="at">fill =</span> <span class="st">&quot;#F9D1D1&quot;</span>) <span class="sc">+</span></span>
 <span id="cb1-21"><a href="introduction.html#cb1-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="introduction.html#cb2-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;img/fs.png&quot;</span>)</span></code></pre></div>
+<p><img src="img/fs.png" width="960" /></p>
 <p>Accounting professionals employ a a wide variety of data analytics tools. For instance, FP&amp;A and GL extract data from TM1 and present the results in Excel. External Auditors utilize CAATs ranges from Excel, IDEA, ACL to Tableau, PowerBI, Qlik, and Alteryx over the course of auditing. Analysts build financial models via Excel VBA. As data goes bigger and problems become more complex, those GUI tools become increasingly challenging to work with and their limitations on the performance show up. It has been believed that computer programming languages like R and Python will be a ultimate tool for accounting professionals. Programming codes, text like, allow you to freely express yourself compared to the complicated formula of GUI tools. Business problems can be easily translated into codes in a sensible logical way in which accounting professionals approach them. What’s more, accounting professional can apply R and Python along with those GUI tools as preferred as all tools are integrated well. An obvious advantage to using programming languages is that free open source software, R and Python, have a large and growing global community which provide the ability to do both general and specialized tasks and solve any edge cases accounting professionals might face.</p>
 <p>Increasing focus on data analytics in recent years means that the ability to enhance the improvement of effectiveness and efficiency will be of great interest in practice. Current trends away from manual process and the rise of Robotic Process Automation (RPA) will likely result in greater requirements for accounting professionals in order to automatize repetitive work processes. More and more organizations recognize potential substantial value to be gained from the application of R and Python in corporate settings, and seek to understand better how to integrate with their exiting workflows. As matter of fact, this book is inspired by a meeting with one of our clients. But, the problem is that few accounting professionals really know how to do data analysis in R and Python. It is still considered by many as a IT thing. Given the pressing circumstances, they should be thinking about how to reflect R and Python in their work. This book presents a practical implementation of R for accounting professionals in this regard.</p>
 <p>As this book is intended to be more of a technical manual and targeted at technical practitioners, we aims to show how accounting professionals can achieve the improvement in efficiency and effectiveness using R and do not explain accounting concepts and codes in details. We assumes you are a chartered accountant who have a basic knowledge of computer programming languages. If you have never programmed before, you can get a better sense of it after read Chapter 2. We also provide some pointers for you to study further if there are better books to explain relevant concepts and codes. Our focus has been primarily on teaching data analysis of sales records and general ledger using R in a accounting related context. In order to cover as many key techniques as possible, we try not to repeat code and will do the same thing in different ways. As you read through the book, you will quickly grasp knowledge for the application of these techniques in your work and see benefit from it. That said, use cases and examples in the book will clearly point to the motivation of the analysis and usefulness of functions in practice.</p>
@@ -293,8 +288,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 - Chapter 2 introduces R in a common structural way in which other computer programming languages has same components with slightly different implementation.<br />
 - Chapter 3 and 4 analyze sales records from FP&amp;A perspective. It demonstrate how to extract, transform and load (ETL) data from database and query the database via R and SQL interchangeably. It then proceeds to validate data, perform exploratory data analysis (EDA), and create report and dashboard.<br />
 - Chapter 5 perform audit procedures on general ledger from external auditors points of view. It goes through a variety of technical options for different audit phases.<br />
-- Chapter 6 looks at the various utility tools which would not fit elsewhere in the book, and yet be important enough to mention.</p>
-<p>This book is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License. The code contained in this book is available under the MIT license. If you acknowledge the source and use the contents or any examples of this book for teaching purposes, you don’t need to ask the permission to do so.</p>
+- Chapter 6 looks at the various utility tools which would not fit very well elsewhere in the book, and yet be important enough to mention.</p>
+<p>This book is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License. <a href="https://github.com/stewartli/rauditbookdown">The code contained in this book</a> is available under the MIT license. If you acknowledge the source and use the contents or any examples of this book for teaching purposes, you don’t need to ask the permission to do so.</p>
 <p>My thank to various fantastic packages authors in R and Python community whose work allows me to write this book. I would like to thank various people who helped us make this book better by reading early drafts.</p>
 
 </div>
